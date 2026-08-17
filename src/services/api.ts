@@ -15,7 +15,9 @@ import {
   IDepositFlowItem,
 } from '../types.ts';
 
-const BASE_URL = '/api';
+// Dynamically use Netlify environment variable, Heroku backend, or fallback
+const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://hyipmastertracker-ae98d86ba5fe.herokuapp.com';
+const API_BASE = `${BACKEND_URL}/api`;
 
 function getHeaders(): HeadersInit {
   const token = localStorage.getItem('token');
@@ -29,7 +31,7 @@ function getHeaders(): HeadersInit {
 }
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-  const url = `${BASE_URL}${endpoint}`;
+  const url = `${API_BASE}${endpoint}`;
   const response = await fetch(url, {
     ...options,
     headers: {
