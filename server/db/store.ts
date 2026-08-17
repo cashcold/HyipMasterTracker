@@ -569,7 +569,7 @@ class Store {
       lifetimeDays: 13,
       minInvestment: 100,
       maxInvestment: 20000,
-      ourInvestment: 10000,
+      ourInvestment: 20000,
       referralPercentage: '7%',
       paymentMethods: ['Mobile Money (MTN, Telecel, AT)', 'USDT (Crypto)'],
       withdrawalMethods: 'Instant / Automated 24/7 Gateway',
