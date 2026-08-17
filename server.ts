@@ -7,7 +7,7 @@ import { store } from './server/db/store.ts';
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   // Middleware
   app.use(cors());
@@ -43,7 +43,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`[HyipMasterTracker] Server active on http://0.0.0.0:${PORT}`);
+    console.log(`[HyipMasterTracker] Server active on port ${PORT}`);
   });
 }
 
