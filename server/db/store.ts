@@ -567,7 +567,7 @@ class Store {
       dateAdded: daysAgo(13),
       lastUpdated: hoursAgo(1),
       lifetimeDays: 13,
-      minInvestment: 100,
+      minInvestment: 10,
       maxInvestment: 20000,
       ourInvestment: 20000,
       referralPercentage: '7%',
