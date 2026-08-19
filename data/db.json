@@ -181,7 +181,7 @@
       "dateAdded": "2026-08-04T09:03:07.163Z",
       "lastUpdated": "2026-08-17T08:38:07.452Z",
       "lifetimeDays": 13,
-      "minInvestment": 100,
+      "minInvestment": 10,
       "maxInvestment": 20000,
       "ourInvestment": 20000,
       "referralPercentage": "7%",
