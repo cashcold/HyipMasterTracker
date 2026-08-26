@@ -15,8 +15,8 @@ import {
   IDepositFlowItem,
 } from '../types.ts';
 
-// Dynamically use Netlify environment variable, Heroku backend, or fallback
-const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://hyipmastertracker-ae98d86ba5fe.herokuapp.com';
+// Dynamically use environment variable or fallback to same-origin relative API
+const BACKEND_URL = import.meta.env.VITE_API_URL || '';
 const API_BASE = `${BACKEND_URL}/api`;
 
 function getHeaders(): HeadersInit {
