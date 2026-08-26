@@ -7,21 +7,28 @@ import { store } from './server/db/store.ts';
 
 async function startServer() {
   const app = express();
-  
-  // Use environment port for production hosting (Heroku, Render, etc.) or default to 3000
   const PORT = process.env.PORT || 3000;
 
-  // Global CORS options
-  const corsOptions = {
-    origin: '*', // Adjust to your Netlify/Vercel domain in production if preferred
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-    optionsSuccessStatus: 200 // Ensures compatibility with legacy browsers/clients
-  };
+  // 1. Enable CORS for all incoming origins and headers
+  app.use(cors({
+    origin: true, // Dynamically reflects request origin (works with fetch/credentials)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    credentials: true,
+    optionsSuccessStatus: 200
+  }));
 
-  // Enable CORS middleware & preflight OPTIONS handling
-  app.use(cors(corsOptions));
-  app.options('*', cors(corsOptions));
+  // 2. Explicitly handle preflight OPTIONS requests for all routes
+  app.use((req, res, next) => {
+    if (req.method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+      res.header('Access-Control-Allow-Credentials', 'true');
+      return res.sendStatus(200);
+    }
+    next();
+  });
 
   // Body parser middleware
   app.use(express.json({ limit: '10mb' }));
