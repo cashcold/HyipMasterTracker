@@ -460,7 +460,7 @@ class Store {
         status: 'PAYING',
         riskScore: 8.5,
         riskLevel: 'Good',
-        rating: 9.0,
+        rating: 9.1,
         dateAdded: '2026-08-26T00:00:00.000Z',
         lastUpdated: '2026-08-26T19:26:27.000Z',
         lifetimeDays: 1,
