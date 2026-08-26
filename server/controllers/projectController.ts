@@ -48,15 +48,15 @@ export async function getProjects(req: AuthRequest, res: Response) {
     if (risk && risk.toLowerCase() !== 'all') {
       const r = risk.toLowerCase();
       if (r === 'very-high-confidence' || r === 'very_high') {
-        results = results.filter((p) => p.riskScore >= 9.0);
+        results = results.filter((p) => p.riskScore >= 8.0);
       } else if (r === 'good' || r === 'low') {
-        results = results.filter((p) => p.riskScore >= 7.0 && p.riskScore < 9.0);
+        results = results.filter((p) => p.riskScore >= 7.0 && p.riskScore < 8.0);
       } else if (r === 'moderate' || r === 'medium') {
-        results = results.filter((p) => p.riskScore >= 5.0 && p.riskScore < 7.0);
+        results = results.filter((p) => p.riskScore >= 5.0 && p.riskScore < 8.0);
       } else if (r === 'high' || r === 'high-risk') {
         results = results.filter((p) => p.riskScore >= 3.0 && p.riskScore < 5.0);
       } else if (r === 'critical' || r === 'critical-risk') {
-        results = results.filter((p) => p.riskScore < 3.0);
+        results = results.filter((p) => p.riskScore < 5.0);
       }
     }
 
