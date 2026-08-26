@@ -45,7 +45,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
         setLoading(true);
         const params: Record<string, string> = {
           page: currentPage.toString(),
-          limit: '10',
+          limit: '20',
         };
         if (selectedPayment && selectedPayment !== 'all') {
           params.paymentMethod = selectedPayment;
@@ -162,7 +162,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               <span>HYIPs {selectedPayment !== 'all' ? `(${selectedPayment})` : ''}</span>
             </div>
 
-            {/* Pagination links: Prev 1 2 Next */}
+            {/* Dynamic pagination links */}
             <div className="flex items-center gap-1.5 text-xs font-bold text-slate-300">
               <button
                 disabled={currentPage <= 1}
@@ -173,22 +173,17 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               >
                 Prev
               </button>
-              <button
-                onClick={() => setCurrentPage(1)}
-                className={`w-5 h-5 rounded flex items-center justify-center cursor-pointer ${
-                  currentPage === 1 ? 'bg-blue-600 text-white' : 'hover:bg-slate-700'
-                }`}
-              >
-                1
-              </button>
-              <button
-                onClick={() => setCurrentPage(2)}
-                className={`w-5 h-5 rounded flex items-center justify-center cursor-pointer ${
-                  currentPage === 2 ? 'bg-blue-600 text-white' : 'hover:bg-slate-700'
-                }`}
-              >
-                2
-              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <button
+                  key={pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={`w-5 h-5 rounded flex items-center justify-center cursor-pointer ${
+                    currentPage === pageNum ? 'bg-blue-600 text-white' : 'hover:bg-slate-700'
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              ))}
               <button
                 disabled={currentPage >= totalPages}
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}

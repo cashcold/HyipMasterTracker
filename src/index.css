@@ -448,7 +448,7 @@
 }
 
 .goofy-wiggle {
-  animation: goofy-wiggle 1.2s ease-in-out infinite;
+  animation: goofy-wiggle 1.3s ease-in-out infinite;
 }
 
 @keyframes goofy-hop {

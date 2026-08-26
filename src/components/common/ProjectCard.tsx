@@ -58,8 +58,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   const handleVisit = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (project.website) {
-      window.open(project.website, '_blank');
+    const url = project.websiteUrl || (project as any).website;
+    if (url) {
+      window.open(url, '_blank');
     } else {
       navigate(`/hyips/${project.slug}`);
     }
@@ -77,11 +78,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const negativeReviews = Math.max(0, (project.reviewCount || 10) - positiveReviews);
 
   // Views & clicks count
-  const viewsCount = project.views || 14438;
-  const clicksCount = project.clicks || 1299;
+  const viewsCount = project.viewsCount || (project as any).views || 14438;
+  const clicksCount = (project as any).clicks || Math.max(129, Math.round(viewsCount * 0.089));
 
   // Added date formatting
-  const addedDate = new Date(project.createdAt).toLocaleDateString('en-GB', {
+  const addedDate = new Date(project.dateAdded || project.createdAt).toLocaleDateString('en-GB', {
     day: '2-digit',
     month: 'short',
     year: 'numeric',
@@ -272,7 +273,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <span className="text-slate-300 font-bold">|</span>
           <span className="goofy-emoji-2 text-[10px] inline-block">⚡</span>
           <span className="font-medium">Withdrawal:</span>{' '}
-          <span className="px-1 py-0.2 rounded-xs bg-[#0284c7] text-white font-bold text-[10px]">Manual</span>
+          <span className={`px-1 py-0.2 rounded-xs text-white font-bold text-[10px] ${
+            project.withdrawalMethods && project.withdrawalMethods.toLowerCase().includes('instant')
+              ? 'bg-emerald-600'
+              : 'bg-[#0284c7]'
+          }`}>
+            {project.withdrawalMethods && project.withdrawalMethods.toLowerCase().includes('instant') ? 'Instant' : 'Manual'}
+          </span>
           <span className="goofy-emoji-bounce text-[10px] inline-block">🔐</span>
         </p>
 

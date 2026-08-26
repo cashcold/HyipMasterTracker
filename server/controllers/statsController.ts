@@ -188,6 +188,13 @@ export function generateDepositFlow() {
     logo: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=80',
   };
 
+  const auradiamond = store.projects.find((p) => p.id === 'proj-aura-diamond') || {
+    id: 'proj-aura-diamond',
+    name: 'Aura Diamond Holdings',
+    slug: 'aura-diamond-holdings',
+    logo: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80',
+  };
+
   const alphayield = store.projects.find((p) => p.id === 'proj-1') || {
     id: 'proj-1',
     name: 'AlphaYield Protocol',
@@ -216,11 +223,25 @@ export function generateDepositFlow() {
     logo: 'https://images.unsplash.com/photo-1622979135240-caa6648190b6?w=600&auto=format&fit=crop&q=80',
   };
 
-  // 9 verified live deposits with current real-time timestamps (all amounts >= $2,500 with max on GoldBod Pro)
+  // 9 verified live deposits with current real-time timestamps
   const rawDeposits = [
     {
+      id: 'dep-flow-0',
+      minutesAgo: 1,
+      project: auradiamond,
+      investorName: 'Alexander_Sterling',
+      investorCountry: 'United Kingdom',
+      investorFlag: '🇬🇧',
+      amountUsd: 18500,
+      cryptoAmount: '18,500.00 USDT',
+      paymentMethod: 'USDT (TRC20)',
+      planName: 'Imperial Emerald Vault Plan (+20% Profit)',
+      txHash: '0xda41...e782',
+      status: 'VERIFIED_ON_CHAIN',
+    },
+    {
       id: 'dep-flow-1',
-      minutesAgo: 2,
+      minutesAgo: 3,
       project: goldbod,
       investorName: 'David_Vance',
       investorCountry: 'United States',

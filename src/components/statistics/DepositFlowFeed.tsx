@@ -32,7 +32,7 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
   navigate,
 }) => {
   const [deposits, setDeposits] = useState<IDepositFlowItem[]>(initialDeposits);
-  const [filter, setFilter] = useState<'all' | 'goldbod' | 'cloudminex' | 'crypto' | 'momo'>('all');
+  const [filter, setFilter] = useState<'all' | 'auradiamond' | 'goldbod' | 'cloudminex' | 'crypto' | 'momo'>('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastRefreshedTime, setLastRefreshedTime] = useState<string>('');
 
@@ -69,6 +69,7 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
 
   const filteredDeposits = deposits.filter((item) => {
     if (filter === 'all') return true;
+    if (filter === 'auradiamond') return item.projectSlug.includes('aura-diamond') || item.projectName.toLowerCase().includes('aura');
     if (filter === 'goldbod') return item.projectSlug.includes('goldbod') || item.projectName.toLowerCase().includes('gold');
     if (filter === 'cloudminex') return item.projectSlug.includes('cloudminex') || item.projectName.toLowerCase().includes('cloud');
     if (filter === 'crypto') return item.paymentMethod.toLowerCase().includes('usdt') || item.paymentMethod.toLowerCase().includes('btc') || item.paymentMethod.toLowerCase().includes('eth') || item.paymentMethod.toLowerCase().includes('usdc');
@@ -141,6 +142,18 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
 
           <button
             type="button"
+            onClick={() => setFilter('auradiamond')}
+            className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+              filter === 'auradiamond'
+                ? 'bg-gradient-to-r from-sky-400 to-blue-500 text-slate-950 font-black shadow-md shadow-sky-500/30'
+                : 'bg-slate-900/80 hover:bg-slate-800 text-sky-300 border border-slate-800'
+            }`}
+          >
+            <span>💎 Aura Diamond</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setFilter('goldbod')}
             className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
               filter === 'goldbod'
@@ -199,6 +212,7 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
       {/* 9 Deposits Grid / List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
         {filteredDeposits.map((item, index) => {
+          const isAura = item.projectName.toLowerCase().includes('aura') || item.projectSlug.includes('aura-diamond');
           const isGold = item.projectName.toLowerCase().includes('gold') || item.projectSlug.includes('goldbod');
           const isCloud = item.projectName.toLowerCase().includes('cloud') || item.projectSlug.includes('cloudminex');
 
@@ -207,7 +221,9 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
               key={item.id || `dep-${index}`}
               onClick={() => navigate && navigate(`/hyips/${item.projectSlug}`)}
               className={`p-3.5 rounded-xl bg-slate-900/90 border transition-all cursor-pointer hover:scale-[1.01] flex flex-col justify-between space-y-3 relative overflow-hidden group ${
-                isGold
+                isAura
+                  ? 'border-sky-400/40 hover:border-sky-400/90 bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950/30'
+                  : isGold
                   ? 'border-amber-500/30 hover:border-amber-400/80 bg-gradient-to-b from-slate-900 via-slate-900 to-amber-950/20'
                   : isCloud
                   ? 'border-cyan-500/30 hover:border-cyan-400/80 bg-gradient-to-b from-slate-900 via-slate-900 to-cyan-950/20'

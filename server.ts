@@ -7,14 +7,23 @@ import { store } from './server/db/store.ts';
 
 async function startServer() {
   const app = express();
+  
+  // Use environment port for production hosting (Heroku, Render, etc.) or default to 3000
   const PORT = process.env.PORT || 3000;
 
-  // Middleware
-  app.use(cors({
-        origin: '*', // Adjust to your Netlify domain in production if preferred
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization']
-      }));
+  // Global CORS options
+  const corsOptions = {
+    origin: '*', // Adjust to your Netlify/Vercel domain in production if preferred
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    optionsSuccessStatus: 200 // Ensures compatibility with legacy browsers/clients
+  };
+
+  // Enable CORS middleware & preflight OPTIONS handling
+  app.use(cors(corsOptions));
+  app.options('*', cors(corsOptions));
+
+  // Body parser middleware
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
