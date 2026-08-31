@@ -170,20 +170,20 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
   const neutralReviews = 0;
   const negativeReviews = Math.max(0, (project.reviewCount || 10) - positiveReviews);
 
-  // RCB Deposit flow items with live dynamic current dates
+  // RCB Deposit flow items with live dynamic current dates - 5 deposits per day
   const rcbFlowData = [
-    { date: getLiveCurrentDateStr(2), total: '$94.00', rcb: '$5.40', count: 1, desc: '' },
-    { date: getLiveCurrentDateStr(24), total: '$334.90', rcb: '$18.68', count: 2, desc: 'min: $133.9 max: $201 avg: $168' },
-    { date: getLiveCurrentDateStr(48), total: '$153.00', rcb: '$11.56', count: 1, desc: '' },
-    { date: getLiveCurrentDateStr(72), total: '$1,542.00', rcb: '$135.01', count: 4, desc: 'min: $34 max: $1050 avg: $386' },
-    { date: getLiveCurrentDateStr(96), total: '$3,305.00', rcb: '$182.96', count: 1, desc: '' },
-    { date: getLiveCurrentDateStr(120), total: '$53.00', rcb: '$8.94', count: 1, desc: '' },
-    { date: getLiveCurrentDateStr(144), total: '$70.91', rcb: '$3.95', count: 2, desc: 'min: $31 max: $39.91 avg: $36' },
-    { date: getLiveCurrentDateStr(168), total: '$75.00', rcb: '$4.10', count: 2, desc: 'min: $30 max: $45 avg: $38' },
-    { date: getLiveCurrentDateStr(192), total: '$349.43', rcb: '$20.23', count: 3, desc: 'min: $99 max: $145.17 avg: $117' },
-    { date: getLiveCurrentDateStr(216), total: '$154.07', rcb: '$8.66', count: 1, desc: '' },
-    { date: getLiveCurrentDateStr(240), total: '$63.00', rcb: '$3.61', count: 1, desc: '' },
-    { date: getLiveCurrentDateStr(264), total: '$560.86', rcb: '$36.36', count: 2, desc: '' },
+    { date: getLiveCurrentDateStr(2), total: '$1,480.00', rcb: '$88.80', count: 5, desc: 'min: $50 max: $650 avg: $296' },
+    { date: getLiveCurrentDateStr(24), total: '$2,150.00', rcb: '$129.00', count: 5, desc: 'min: $100 max: $850 avg: $430' },
+    { date: getLiveCurrentDateStr(48), total: '$1,825.00', rcb: '$109.50', count: 5, desc: 'min: $75 max: $700 avg: $365' },
+    { date: getLiveCurrentDateStr(72), total: '$2,390.00', rcb: '$143.40', count: 5, desc: 'min: $80 max: $1050 avg: $478' },
+    { date: getLiveCurrentDateStr(96), total: '$3,850.00', rcb: '$231.00', count: 5, desc: 'min: $120 max: $1500 avg: $770' },
+    { date: getLiveCurrentDateStr(120), total: '$1,260.00', rcb: '$75.60', count: 5, desc: 'min: $40 max: $500 avg: $252' },
+    { date: getLiveCurrentDateStr(144), total: '$1,675.00', rcb: '$100.50', count: 5, desc: 'min: $65 max: $620 avg: $335' },
+    { date: getLiveCurrentDateStr(168), total: '$1,420.00', rcb: '$85.20', count: 5, desc: 'min: $50 max: $550 avg: $284' },
+    { date: getLiveCurrentDateStr(192), total: '$2,080.00', rcb: '$124.80', count: 5, desc: 'min: $90 max: $780 avg: $416' },
+    { date: getLiveCurrentDateStr(216), total: '$1,530.00', rcb: '$91.80', count: 5, desc: 'min: $60 max: $600 avg: $306' },
+    { date: getLiveCurrentDateStr(240), total: '$1,190.00', rcb: '$71.40', count: 5, desc: 'min: $35 max: $480 avg: $238' },
+    { date: getLiveCurrentDateStr(264), total: '$2,450.00', rcb: '$147.00', count: 5, desc: 'min: $110 max: $950 avg: $490' },
   ];
 
   // Radar chart points calculation (6 axes: Monitors, SSL, IP, Content, Design, Hosting)

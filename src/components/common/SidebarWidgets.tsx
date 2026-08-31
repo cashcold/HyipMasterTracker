@@ -229,12 +229,19 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
                 </div>
                 {evt.newStatus && (
                   <div className="mt-1 flex items-center gap-1.5 text-[9px]">
-                    <span className="text-[#64748b]">changed</span>
-                    {evt.oldStatus && (
-                      <StatusBadge status={evt.oldStatus} size="sm" />
+                    {evt.oldStatus && evt.oldStatus !== evt.newStatus ? (
+                      <>
+                        <span className="text-[#64748b]">changed</span>
+                        <StatusBadge status={evt.oldStatus} size="sm" />
+                        <span className="text-[#64748b]">»</span>
+                        <StatusBadge status={evt.newStatus} size="sm" />
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-[#64748b]">status:</span>
+                        <StatusBadge status={evt.newStatus} size="sm" />
+                      </>
                     )}
-                    <span className="text-[#64748b]">»</span>
-                    <StatusBadge status={evt.newStatus} size="sm" />
                   </div>
                 )}
               </div>
