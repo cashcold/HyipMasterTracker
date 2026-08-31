@@ -188,6 +188,13 @@ export function generateDepositFlow() {
     logo: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=80',
   };
 
+  const primegold = store.projects.find((p) => p.id === 'proj-prime-gold') || {
+    id: 'proj-prime-gold',
+    name: 'Prime Gold Resources',
+    slug: 'prime-gold-resources',
+    logo: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?w=600&auto=format&fit=crop&q=80',
+  };
+
   const auradiamond = store.projects.find((p) => p.id === 'proj-aura-diamond') || {
     id: 'proj-aura-diamond',
     name: 'Aura Diamond Holdings',
