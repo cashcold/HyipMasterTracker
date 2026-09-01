@@ -82,9 +82,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const clicksCount = (project as any).clicks || Math.max(129, Math.round(viewsCount * 0.089));
 
   // Added date formatting
-  const addedDate = new Date(project.dateAdded || project.createdAt).toLocaleDateString('en-GB', {
-    day: '2-digit',
+  const addedDate = new Date(project.dateAdded || project.createdAt).toLocaleDateString('en-US', {
     month: 'short',
+    day: 'numeric',
     year: 'numeric',
   });
 

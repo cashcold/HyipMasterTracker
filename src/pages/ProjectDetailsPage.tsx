@@ -378,23 +378,35 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                   <span className="font-extrabold">{restName}</span>
                 </h1>
 
-                <p className="text-[11px] text-[#64748b] flex items-center gap-1.5 flex-wrap">
+                <div className="text-[11px] text-[#64748b] flex items-center gap-2 flex-wrap pt-0.5">
+                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-amber-50/90 border border-amber-300 text-amber-900 font-bold text-[11px] shadow-2xs">
+                    <span>🏛️ Platform Launch Date 📅</span>
+                    <strong className="text-slate-900 font-mono">
+                      {new Date(project.dateAdded || project.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </strong>
+                  </span>
+
                   <span className="font-semibold text-[#475569] flex items-center gap-1">
                     <span>Added:</span>
-                  </span>{' '}
-                  <span className="font-mono font-medium text-slate-800">
-                    {new Date(project.createdAt).toLocaleDateString('en-GB', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                    })}{' '}
-                    07:55
+                    <span className="font-mono font-medium text-slate-800">
+                      {new Date(project.dateAdded || project.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}{' '}
+                      07:55
+                    </span>
                   </span>
+
                   <span className="px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-bold inline-flex items-center gap-1 shadow-2xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                     <span>Active</span>
                   </span>
-                </p>
+                </div>
 
                 {/* Our Investment Capsule with Goofy Animation Accent */}
                 <div className="pt-0.5 pb-0.5">
