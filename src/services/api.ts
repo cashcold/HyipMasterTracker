@@ -16,8 +16,20 @@ import {
 } from '../types.ts';
 
 // Dynamically use environment variable or fallback to same-origin relative API
-const BACKEND_URL = import.meta.env.VITE_API_URL || '';
-const API_BASE = `${BACKEND_URL}/api`;
+function getBackendUrl(): string {
+  const customOverride = typeof window !== 'undefined' ? localStorage.getItem('HYIP_CUSTOM_API_URL') : null;
+  if (customOverride) return customOverride.replace(/\/+$/, '');
+
+  const envUrl = (import.meta.env.VITE_API_URL || '').trim();
+  // If previously pointed to a decommissioned Heroku dyno, fallback to same-origin
+  if (envUrl.includes('herokuapp.com')) {
+    return '';
+  }
+  return envUrl.replace(/\/+$/, '');
+}
+
+const BACKEND_URL = getBackendUrl();
+const API_BASE = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
 
 function getHeaders(): HeadersInit {
   const token = localStorage.getItem('token');
@@ -40,9 +52,27 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     },
   });
 
-  const data = await response.json();
+  let data: any;
+  const contentType = response.headers.get('content-type') || '';
+  if (contentType.includes('application/json')) {
+    data = await response.json();
+  } else {
+    const text = await response.text();
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = {
+        error: `Server responded with ${response.status} (${response.statusText || 'Non-JSON response'}). ${
+          response.status === 404
+            ? 'Endpoint not found. If using an external API URL, verify the server is active.'
+            : text.slice(0, 150)
+        }`,
+      };
+    }
+  }
+
   if (!response.ok) {
-    throw new Error(data.error || 'Network request failed');
+    throw new Error(data.error || `Network request failed with status ${response.status}`);
   }
   return data;
 }

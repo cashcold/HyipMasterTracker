@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
-import {
+import type {
   IUser,
   IProject,
   IMonitor,
@@ -106,55 +106,66 @@ class Store {
   private init() {
     try {
       if (!fs.existsSync(DATA_DIR)) {
-        fs.mkdirSync(DATA_DIR, { recursive: true });
+        try {
+          fs.mkdirSync(DATA_DIR, { recursive: true });
+        } catch {
+          // Read-only filesystem in serverless environments (e.g. Vercel)
+        }
       }
 
       // Always populate baseline seed data first from code definition
       this.seedInitialData();
 
-      if (fs.existsSync(DB_FILE)) {
-        try {
-          const raw = fs.readFileSync(DB_FILE, 'utf-8');
-          const savedDb: IDatabase = JSON.parse(raw);
+      // Check ephemeral /tmp/db.json (if written previously in warm lambda) then primary DB_FILE
+      const candidateFiles = [path.join('/tmp', 'db.json'), DB_FILE];
+      let loadedFromFile = false;
 
-          if (savedDb) {
-            // Merge custom registered users
-            if (savedDb.users && savedDb.users.length > 0) {
-              const seedUserUsernames = new Set(this.db.users.map((u) => u.username.toLowerCase()));
-              const customUsers = savedDb.users.filter((u) => !seedUserUsernames.has(u.username.toLowerCase()));
-              this.db.users.push(...customUsers);
-            }
+      for (const targetFile of candidateFiles) {
+        if (!loadedFromFile && fs.existsSync(targetFile)) {
+          try {
+            const raw = fs.readFileSync(targetFile, 'utf-8');
+            const savedDb: IDatabase = JSON.parse(raw);
 
-            // Merge any runtime created projects not present in code seed
-            if (savedDb.projects && savedDb.projects.length > 0) {
-              const seedProjIds = new Set(this.db.projects.map((p) => p.id));
-              const runtimeProjects = savedDb.projects.filter((p) => !seedProjIds.has(p.id));
-              this.db.projects.push(...runtimeProjects);
-            }
+            if (savedDb) {
+              loadedFromFile = true;
+              // Merge custom registered users
+              if (savedDb.users && savedDb.users.length > 0) {
+                const seedUserUsernames = new Set(this.db.users.map((u) => u.username.toLowerCase()));
+                const customUsers = savedDb.users.filter((u) => !seedUserUsernames.has(u.username.toLowerCase()));
+                this.db.users.push(...customUsers);
+              }
 
-            // Merge dynamic reviews
-            if (savedDb.reviews && savedDb.reviews.length > 0) {
-              const seedReviewIds = new Set(this.db.reviews.map((r) => r.id));
-              const customReviews = savedDb.reviews.filter((r) => !seedReviewIds.has(r.id));
-              this.db.reviews.push(...customReviews);
-            }
+              // Merge any runtime created projects not present in code seed
+              if (savedDb.projects && savedDb.projects.length > 0) {
+                const seedProjIds = new Set(this.db.projects.map((p) => p.id));
+                const runtimeProjects = savedDb.projects.filter((p) => !seedProjIds.has(p.id));
+                this.db.projects.push(...runtimeProjects);
+              }
 
-            if (savedDb.watchlists && savedDb.watchlists.length > 0) {
-              this.db.watchlists = savedDb.watchlists;
-            }
+              // Merge dynamic reviews
+              if (savedDb.reviews && savedDb.reviews.length > 0) {
+                const seedReviewIds = new Set(this.db.reviews.map((r) => r.id));
+                const customReviews = savedDb.reviews.filter((r) => !seedReviewIds.has(r.id));
+                this.db.reviews.push(...customReviews);
+              }
 
-            if (savedDb.notifications && savedDb.notifications.length > 0) {
-              this.db.notifications = savedDb.notifications;
-            }
+              if (savedDb.watchlists && savedDb.watchlists.length > 0) {
+                this.db.watchlists = savedDb.watchlists;
+              }
 
-            if (savedDb.advertisements && savedDb.advertisements.length > 0) {
-              const seedAdIds = new Set(this.db.advertisements.map((a) => a.id));
-              const customAds = savedDb.advertisements.filter((a) => !seedAdIds.has(a.id));
-              this.db.advertisements.push(...customAds);
+              if (savedDb.notifications && savedDb.notifications.length > 0) {
+                this.db.notifications = savedDb.notifications;
+              }
+
+              if (savedDb.advertisements && savedDb.advertisements.length > 0) {
+                const seedAdIds = new Set(this.db.advertisements.map((a) => a.id));
+                const customAds = savedDb.advertisements.filter((a) => !seedAdIds.has(a.id));
+                this.db.advertisements.push(...customAds);
+              }
             }
+          } catch (e) {
+            console.warn(`[Store] Could not parse ${targetFile}, trying next source:`, e);
           }
-        } catch (e) {
-          console.warn('[Store] Could not read saved DB, using fresh seed data:', e);
         }
       }
 
@@ -265,11 +276,20 @@ class Store {
   public persist() {
     try {
       if (!fs.existsSync(DATA_DIR)) {
-        fs.mkdirSync(DATA_DIR, { recursive: true });
+        try {
+          fs.mkdirSync(DATA_DIR, { recursive: true });
+        } catch {
+          // Read-only filesystem in serverless environments (e.g. Vercel)
+        }
       }
       fs.writeFileSync(DB_FILE, JSON.stringify(this.db, null, 2), 'utf-8');
     } catch (err) {
-      console.error('[Store] Failed to write db.json:', err);
+      // In serverless environments where root is read-only, write to ephemeral /tmp
+      try {
+        fs.writeFileSync(path.join('/tmp', 'db.json'), JSON.stringify(this.db, null, 2), 'utf-8');
+      } catch (tmpErr) {
+        console.warn('[Store] In-memory update retained (read-only filesystem):', (err as any)?.message);
+      }
     }
   }
 
