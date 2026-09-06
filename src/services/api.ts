@@ -15,6 +15,8 @@ import {
   IDepositFlowItem,
 } from '../types.ts';
 
+import { getFallbackData } from './fallbackData.ts';
+
 // Dynamically use environment variable or fallback to same-origin relative API
 function getBackendUrl(): string {
   const customOverride = typeof window !== 'undefined' ? localStorage.getItem('HYIP_CUSTOM_API_URL') : null;
@@ -57,17 +59,27 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   if (contentType.includes('application/json')) {
     data = await response.json();
   } else {
+    // If the server returned HTML (e.g. Netlify serving index.html for unhandled /api/* before functions deploy),
+    // safely fallback to bundled baseline data for read queries so UI never breaks!
+    const fallback = getFallbackData(endpoint);
+    if (fallback) {
+      console.warn(
+        `[API] Received non-JSON response (${contentType || 'text/html'}) from ${url}. Using bundled baseline dataset for ${endpoint}.`
+      );
+      return fallback as T;
+    }
+
     const text = await response.text();
     try {
       data = JSON.parse(text);
     } catch {
-      data = {
-        error: `Server responded with ${response.status} (${response.statusText || 'Non-JSON response'}). ${
-          response.status === 404
-            ? 'Endpoint not found. If using an external API URL, verify the server is active.'
+      throw new Error(
+        `Server returned non-JSON response (${contentType || 'text/html'}). ${
+          response.status === 200
+            ? 'Endpoint served static index.html. Ensure serverless functions or VITE_API_URL is configured.'
             : text.slice(0, 150)
-        }`,
-      };
+        }`
+      );
     }
   }
 
