@@ -68,16 +68,21 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
   }, [initialDeposits]);
 
   const filteredDeposits = deposits.filter((item) => {
+    if (!item) return false;
+    const slug = (item.projectSlug || '').toLowerCase();
+    const name = (item.projectName || '').toLowerCase();
+    const method = (item.paymentMethod || '').toLowerCase();
+
     if (filter === 'all') return true;
-    if (filter === 'auradiamond') return item.projectSlug.includes('aura-diamond') || item.projectName.toLowerCase().includes('aura');
-    if (filter === 'goldbod') return item.projectSlug.includes('goldbod') || item.projectName.toLowerCase().includes('gold');
-    if (filter === 'cloudminex') return item.projectSlug.includes('cloudminex') || item.projectName.toLowerCase().includes('cloud');
-    if (filter === 'crypto') return item.paymentMethod.toLowerCase().includes('usdt') || item.paymentMethod.toLowerCase().includes('btc') || item.paymentMethod.toLowerCase().includes('eth') || item.paymentMethod.toLowerCase().includes('usdc');
-    if (filter === 'momo') return item.paymentMethod.toLowerCase().includes('mobile') || item.paymentMethod.toLowerCase().includes('mtn') || item.paymentMethod.toLowerCase().includes('telecel');
+    if (filter === 'auradiamond') return slug.includes('aura-diamond') || name.includes('aura');
+    if (filter === 'goldbod') return slug.includes('goldbod') || name.includes('gold');
+    if (filter === 'cloudminex') return slug.includes('cloudminex') || name.includes('cloud');
+    if (filter === 'crypto') return method.includes('usdt') || method.includes('btc') || method.includes('eth') || method.includes('usdc');
+    if (filter === 'momo') return method.includes('mobile') || method.includes('mtn') || method.includes('telecel');
     return true;
   });
 
-  const totalFilteredVolume = filteredDeposits.reduce((acc, d) => acc + d.amountUsd, 0);
+  const totalFilteredVolume = filteredDeposits.reduce((acc, d) => acc + (d?.amountUsd || 0), 0);
 
   return (
     <div className="bg-[#0b1329] border border-slate-800 hover:border-blue-500/40 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4 transition-all">
@@ -212,14 +217,18 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
       {/* 9 Deposits Grid / List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
         {filteredDeposits.map((item, index) => {
-          const isAura = item.projectName.toLowerCase().includes('aura') || item.projectSlug.includes('aura-diamond');
-          const isGold = item.projectName.toLowerCase().includes('gold') || item.projectSlug.includes('goldbod');
-          const isCloud = item.projectName.toLowerCase().includes('cloud') || item.projectSlug.includes('cloudminex');
+          const name = item.projectName || 'Verified Program';
+          const slug = item.projectSlug || 'program';
+          const isAura = name.toLowerCase().includes('aura') || slug.includes('aura-diamond');
+          const isGold = name.toLowerCase().includes('gold') || slug.includes('goldbod');
+          const isCloud = name.toLowerCase().includes('cloud') || slug.includes('cloudminex');
+          const amount = typeof item.amountUsd === 'number' ? item.amountUsd : 0;
+          const statusText = (item.status || 'VERIFIED').replace(/_/g, ' ');
 
           return (
             <div
               key={item.id || `dep-${index}`}
-              onClick={() => navigate && navigate(`/hyips/${item.projectSlug}`)}
+              onClick={() => navigate && navigate(`/hyips/${slug}`)}
               className={`p-3.5 rounded-xl bg-slate-900/90 border transition-all cursor-pointer hover:scale-[1.01] flex flex-col justify-between space-y-3 relative overflow-hidden group ${
                 isAura
                   ? 'border-sky-400/40 hover:border-sky-400/90 bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950/30'
@@ -235,8 +244,8 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-lg overflow-hidden border border-slate-700 bg-slate-950 shrink-0 p-0.5 relative">
                     <img
-                      src={item.projectLogo}
-                      alt={item.projectName}
+                      src={item.projectLogo || 'https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=600&auto=format&fit=crop&q=80'}
+                      alt={name}
                       className="w-full h-full object-cover rounded-md"
                       referrerPolicy="no-referrer"
                       onError={(e) => {
@@ -252,12 +261,12 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
 
                   <div>
                     <h4 className="font-black text-white text-sm group-hover:text-blue-400 transition-colors flex items-center gap-1.5">
-                      <span>{item.projectName}</span>
+                      <span>{name}</span>
                       {isGold && <span className="text-xs">🟡</span>}
                       {isCloud && <span className="text-xs">⚡</span>}
                     </h4>
                     <span className="text-[11px] text-slate-400 font-medium block">
-                      {item.planName}
+                      {item.planName || 'Standard Vault Plan'}
                     </span>
                   </div>
                 </div>
@@ -266,10 +275,10 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
                 <div className="text-right shrink-0">
                   <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/80 font-mono text-[10px] font-bold inline-flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>{item.timeAgo}</span>
+                    <span>{item.timeAgo || 'Just now'}</span>
                   </span>
                   <span className="text-[9px] text-slate-500 font-mono block mt-0.5">
-                    {item.formattedTime}
+                    {item.formattedTime || 'Recent'}
                   </span>
                 </div>
               </div>
@@ -281,10 +290,10 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
                     Deposit Amount
                   </span>
                   <div className="text-base font-black text-emerald-400 font-mono">
-                    ${item.amountUsd.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </div>
                   <span className="text-[10px] text-amber-300 font-mono block">
-                    {item.cryptoAmount}
+                    {item.cryptoAmount || `$${amount}`}
                   </span>
                 </div>
 
@@ -293,10 +302,10 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
                     Gateway
                   </span>
                   <span className="text-xs font-bold text-slate-200 block">
-                    {item.paymentMethod}
+                    {item.paymentMethod || 'Crypto'}
                   </span>
                   <span className="text-[9px] font-mono text-cyan-400">
-                    Tx: {item.txHash}
+                    Tx: {item.txHash || '0x...'}
                   </span>
                 </div>
               </div>
@@ -304,13 +313,13 @@ export const DepositFlowFeed: React.FC<DepositFlowFeedProps> = ({
               {/* Bottom Row: Investor Info & On-chain Status */}
               <div className="flex items-center justify-between text-[11px] pt-1 border-t border-slate-800/80">
                 <div className="flex items-center gap-1.5 text-slate-300 font-medium">
-                  <span>{item.investorFlag}</span>
-                  <span className="font-mono text-slate-300">{item.investorName}</span>
+                  <span>{item.investorFlag || '🌐'}</span>
+                  <span className="font-mono text-slate-300">{item.investorName || 'Investor'}</span>
                 </div>
 
                 <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-bold">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{item.status.replace('_', ' ')}</span>
+                  <span>{statusText}</span>
                 </div>
               </div>
             </div>

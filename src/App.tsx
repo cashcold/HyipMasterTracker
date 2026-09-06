@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ErrorBoundary } from './components/common/ErrorBoundary.tsx';
 import { AuthProvider } from './context/AuthContext.tsx';
 import { ThemeProvider, useTheme } from './context/ThemeContext.tsx';
 import { Header } from './components/common/Header.tsx';
@@ -146,10 +147,12 @@ function MainApp() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <MainApp />
-      </ThemeProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <ThemeProvider>
+          <MainApp />
+        </ThemeProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }

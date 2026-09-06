@@ -551,8 +551,12 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                     <span className="w-4 h-4 rounded-xs bg-[#16a34a] text-white flex items-center justify-center text-[9px] font-bold" title="EV SSL">
                       EV
                     </span>
-                    <Shield className="w-3.5 h-3.5 text-[#0284c7]" title="DDoS Protected" />
-                    <Server className="w-3.5 h-3.5 text-[#16a34a]" title="Dedicated Server" />
+                    <span title="DDoS Protected">
+                      <Shield className="w-3.5 h-3.5 text-[#0284c7]" />
+                    </span>
+                    <span title="Dedicated Server">
+                      <Server className="w-3.5 h-3.5 text-[#16a34a]" />
+                    </span>
                   </div>
                 </div>
               </div>

@@ -146,7 +146,7 @@ export const StatisticsPage: React.FC<{ navigate: (path: string) => void }> = ({
       {/* D3 DYNAMIC GLOBAL HYIP MARKET ACTIVITY LINE CHART */}
       <GlobalMarketActivityChart
         data={dailyDepositActivity}
-        summary={summary}
+        summary={stats?.summary}
       />
 
       {/* 9 VERIFIED LIVE DEPOSIT FLOW STREAM */}

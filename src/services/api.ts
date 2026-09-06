@@ -17,17 +17,24 @@ import {
 
 import { getFallbackData } from './fallbackData.ts';
 
-// Dynamically use environment variable or fallback to same-origin relative API
+const HEROKU_API_URL = 'https://hyipmastertracker-ae98d86ba5fe.herokuapp.com';
+
+// Dynamically use environment variable, Heroku backend on Netlify, or relative API
 function getBackendUrl(): string {
   const customOverride = typeof window !== 'undefined' ? localStorage.getItem('HYIP_CUSTOM_API_URL') : null;
   if (customOverride) return customOverride.replace(/\/+$/, '');
 
   const envUrl = (import.meta.env.VITE_API_URL || '').trim();
-  // If previously pointed to a decommissioned Heroku dyno, fallback to same-origin
-  if (envUrl.includes('herokuapp.com')) {
-    return '';
+  if (envUrl) {
+    return envUrl.replace(/\/+$/, '');
   }
-  return envUrl.replace(/\/+$/, '');
+
+  // If running in browser on Netlify domain, route directly to Heroku backend
+  if (typeof window !== 'undefined' && window.location.hostname.includes('netlify.app')) {
+    return HEROKU_API_URL;
+  }
+
+  return '';
 }
 
 const BACKEND_URL = getBackendUrl();
@@ -46,21 +53,74 @@ function getHeaders(): HeadersInit {
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      ...getHeaders(),
-      ...(options.headers || {}),
-    },
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(url, {
+      ...options,
+      headers: {
+        ...getHeaders(),
+        ...(options.headers || {}),
+      },
+    });
+  } catch (netErr) {
+    // If primary fetch failed (e.g. CORS or network error on relative /api), attempt direct Heroku query
+    if (!url.includes('herokuapp.com')) {
+      try {
+        const altUrl = `${HEROKU_API_URL}/api${endpoint}`;
+        const altResponse = await fetch(altUrl, {
+          ...options,
+          headers: {
+            ...getHeaders(),
+            ...(options.headers || {}),
+          },
+        });
+        const altType = altResponse.headers.get('content-type') || '';
+        if (altType.includes('application/json')) {
+          return (await altResponse.json()) as T;
+        }
+      } catch {
+        // Fall through to fallback data
+      }
+    }
+
+    const fallback = getFallbackData(endpoint);
+    if (fallback) {
+      console.warn(`[API] Network error fetching ${url}. Using bundled baseline dataset.`);
+      return fallback as T;
+    }
+    throw netErr;
+  }
 
   let data: any;
   const contentType = response.headers.get('content-type') || '';
   if (contentType.includes('application/json')) {
     data = await response.json();
   } else {
-    // If the server returned HTML (e.g. Netlify serving index.html for unhandled /api/* before functions deploy),
-    // safely fallback to bundled baseline data for read queries so UI never breaks!
+    // If the server returned HTML (e.g. Netlify serving index.html for relative /api/*),
+    // attempt query to Heroku backend before falling back to bundled dataset
+    if (!url.includes('herokuapp.com')) {
+      try {
+        const herokuUrl = `${HEROKU_API_URL}/api${endpoint}`;
+        const herokuResponse = await fetch(herokuUrl, {
+          ...options,
+          headers: {
+            ...getHeaders(),
+            ...(options.headers || {}),
+          },
+        });
+        const herokuType = herokuResponse.headers.get('content-type') || '';
+        if (herokuType.includes('application/json')) {
+          const herokuData = await herokuResponse.json();
+          if (herokuResponse.ok) {
+            return herokuData as T;
+          }
+        }
+      } catch {
+        // Fall through to getFallbackData
+      }
+    }
+
     const fallback = getFallbackData(endpoint);
     if (fallback) {
       console.warn(

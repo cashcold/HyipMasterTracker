@@ -1,4 +1,14 @@
-export type UserRole = 'USER' | 'MODERATOR' | 'EDITOR' | 'ADMIN' | 'SUPER_ADMIN';
+export type UserRole =
+  | 'USER'
+  | 'MODERATOR'
+  | 'EDITOR'
+  | 'ADMIN'
+  | 'SUPER_ADMIN'
+  | 'user'
+  | 'moderator'
+  | 'editor'
+  | 'admin'
+  | 'super_admin';
 
 export type ProjectStatus = 'PAYING' | 'WAITING' | 'PROBLEM' | 'NOT PAID' | 'CLOSED' | 'UNKNOWN';
 
@@ -15,7 +25,15 @@ export type EventType =
   | 'MONITOR_ADDED'
   | 'MONITOR_REPORT';
 
-export type ReviewStatus = 'Pending' | 'Approved' | 'Rejected' | 'Flagged';
+export type ReviewStatus =
+  | 'Pending'
+  | 'Approved'
+  | 'Rejected'
+  | 'Flagged'
+  | 'PENDING'
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'FLAGGED';
 
 export type ReviewCategory =
   | 'Positive'
@@ -95,7 +113,11 @@ export interface IProject {
   isSponsored: boolean;
   isApproved: boolean;
   viewsCount: number;
+  viewCount?: number;
   reviewCount: number;
+  totalDeposits?: number;
+  logoUrl?: string;
+  dailyProfit?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -162,6 +184,10 @@ export interface IEvent {
   oldStatus?: ProjectStatus;
   newStatus?: ProjectStatus;
   message: string;
+  title?: string;
+  description?: string;
+  source?: string;
+  metadata?: Record<string, any>;
   monitorId?: string;
   monitorName?: string;
   createdBy?: string;
@@ -192,6 +218,10 @@ export interface IAdvertisement {
   priority: number;
   impressions: number;
   clicks: number;
+  isActive?: boolean;
+  sponsorName?: string;
+  clicksCount?: number;
+  impressionsCount?: number;
   createdAt: string;
 }
 
@@ -200,7 +230,7 @@ export interface IProjectSubmission {
   submittedBy?: string;
   submitterEmail: string;
   projectData: Partial<IProject>;
-  status: 'Pending Review' | 'Approved' | 'Rejected';
+  status: 'Pending Review' | 'Approved' | 'Rejected' | 'PENDING' | 'APPROVED' | 'REJECTED';
   adminNotes?: string;
   reviewedBy?: string;
   reviewedAt?: string;
