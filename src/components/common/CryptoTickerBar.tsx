@@ -258,7 +258,7 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
     }
   };
 
-  if (loading && rates.length === 0) {
+  if (loading && (!Array.isArray(rates) || rates.length === 0)) {
     return (
       <div className="bg-[#0f172a] text-slate-300 py-1.5 px-3 border-b border-[#1e293b] text-[11px] flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -292,7 +292,7 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
 
         {/* Center: Live Rates Scrolling Marquee / Badges */}
         <div className="flex-1 overflow-x-auto no-scrollbar flex items-center gap-3.5 py-0.5">
-          {rates.slice(0, 10).map((crypto) => {
+          {(rates || []).slice(0, 10).map((crypto) => {
             const isPositive = crypto.change24h >= 0;
             return (
               <div

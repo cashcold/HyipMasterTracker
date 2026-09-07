@@ -76,23 +76,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
           api.getStatistics().catch(() => null),
         ]);
 
-        if (ratesData.rates && ratesData.rates.length > 0) {
+        if (ratesData && Array.isArray(ratesData.rates) && ratesData.rates.length > 0) {
           setCryptoRates(ratesData.rates);
         }
 
         if (statsData) {
-          if (statsData.dailyDepositActivity && statsData.dailyDepositActivity.length > 0) {
+          if (Array.isArray(statsData.dailyDepositActivity) && statsData.dailyDepositActivity.length > 0) {
             setMarketActivity(statsData.dailyDepositActivity);
           }
           if (statsData.summary) {
             setMarketSummary(statsData.summary);
           }
-          if (statsData.depositFlow && statsData.depositFlow.length > 0) {
+          if (Array.isArray(statsData.depositFlow) && statsData.depositFlow.length > 0) {
             setDepositFlow(statsData.depositFlow);
           }
         }
 
-        if (data.projects && data.projects.length > 0) {
+        if (data && Array.isArray(data.projects) && data.projects.length > 0) {
           setFeaturedProjects(data.projects);
           const paying = data.stats?.paying ?? data.projects.filter((p: IProject) => p.status === 'PAYING').length;
           const problem = (data.stats?.problem ?? 0) + (data.stats?.notPaid ?? 0);
@@ -510,7 +510,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
 
         {/* Featured Program Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredProjects.slice(0, 6).map((project) => {
+          {(featuredProjects || []).slice(0, 6).map((project) => {
             const logo = project.logo || (project as any).logoUrl;
             const primaryPlan = project.plans && project.plans.length > 0 ? project.plans[0] : null;
             const yieldText = (project as any).dailyProfit || (primaryPlan ? primaryPlan.advertisedReturn : '1.5% - 3.0%');
@@ -623,7 +623,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
           </button>
         </div>
 
-        {cryptoRates.length > 0 ? (
+        {(cryptoRates || []).length > 0 ? (
           <CryptoRateCards
             rates={cryptoRates}
             isDarkTheme={true}

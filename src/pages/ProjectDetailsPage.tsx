@@ -71,9 +71,9 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
         const res = await api.getProjectBySlug(slug);
         setProject(res.project);
         setRiskAnalysis(res.riskAnalysis);
-        setEvents(res.events);
-        setReviews(res.reviews);
-        setIsWatched(res.isWatched);
+        setEvents(Array.isArray(res?.events) ? res.events : []);
+        setReviews(Array.isArray(res?.reviews) ? res.reviews : []);
+        setIsWatched(Boolean(res?.isWatched));
       } catch (err: any) {
         setError(err.message || 'Project not found');
       } finally {
@@ -113,7 +113,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
         content: reviewContent.trim(),
         category: 'Payment Experience',
       });
-      setReviews([res.review, ...reviews]);
+      setReviews([res.review, ...(reviews || [])]);
       setReviewContent('');
       setShowReviewForm(false);
       alert('Review posted successfully!');
@@ -260,7 +260,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
               <Activity className="w-3.5 h-3.5 text-emerald-400" />
               <span>Events</span>
               <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-mono font-bold">
-                +{events.length || 5}
+                +{(events || []).length || 5}
               </span>
             </button>
 
@@ -278,7 +278,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
               <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
               <span>Reviews</span>
               <span className="px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 text-[9px] font-mono font-bold">
-                +{reviews.length || 11}
+                +{(reviews || []).length || 11}
               </span>
             </button>
 
@@ -614,11 +614,11 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                   <span>Chronological Events & Verification Milestones</span>
                 </div>
                 <span className="text-[10px] text-emerald-300 font-mono font-bold">
-                  {events.length} Recorded Events
+                  {(events || []).length} Recorded Events
                 </span>
               </div>
               <div className="p-4 divide-y divide-[#f1f5f9] space-y-2">
-                {events.length > 0 ? (
+                {(events || []).length > 0 ? (
                   events.map((ev, idx) => (
                     <div key={ev.id} className="pt-2 pb-1 flex items-start justify-between gap-3 text-xs">
                       <div className="flex items-start gap-2.5">
@@ -1014,7 +1014,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
 
             {/* Community Reviews List */}
             <div className="divide-y divide-[#f1f5f9]">
-              {reviews.length > 0 ? (
+              {(reviews || []).length > 0 ? (
                 reviews.map((rev, idx) => (
                   <div key={rev.id} className="p-3 hover:bg-[#fafbfc] text-xs space-y-1">
                     <div className="flex items-center justify-between">

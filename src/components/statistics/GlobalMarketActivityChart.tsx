@@ -64,7 +64,7 @@ export const GlobalMarketActivityChart: React.FC<GlobalMarketActivityChartProps>
 
   // Filter data based on selected timeframe
   const filteredData = useMemo(() => {
-    if (!data || data.length === 0) return [];
+    if (!Array.isArray(data) || data.length === 0) return [];
     if (timeframe === '7d') return data.slice(-7);
     if (timeframe === '14d') return data.slice(-14);
     return data.slice(-30);

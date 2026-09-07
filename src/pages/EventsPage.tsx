@@ -22,8 +22,8 @@ export const EventsPage: React.FC<{ navigate: (path: string) => void }> = ({ nav
         limit: '20',
       })
       .then((res) => {
-        setEvents(res.events);
-        setTotalPages(Math.ceil(res.total / 20) || 1);
+        setEvents(Array.isArray(res?.events) ? res.events : []);
+        setTotalPages(Math.ceil((res?.total || 0) / 20) || 1);
       })
       .finally(() => setLoading(false));
   }, [type, page]);
@@ -76,7 +76,7 @@ export const EventsPage: React.FC<{ navigate: (path: string) => void }> = ({ nav
       <div className="bg-[#111827] border border-slate-800 rounded-xl divide-y divide-slate-800/60 overflow-hidden shadow-lg">
         {loading ? (
           <div className="p-12 text-center text-slate-400 text-xs">Loading live events...</div>
-        ) : events.length > 0 ? (
+        ) : (events || []).length > 0 ? (
           events.map((evt) => (
             <div
               key={evt.id}

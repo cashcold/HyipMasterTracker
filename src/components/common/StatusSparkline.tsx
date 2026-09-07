@@ -142,13 +142,14 @@ export const StatusSparkline: React.FC<StatusSparklineProps> = ({
     return points;
   }, [status, createdAt, events]);
 
+  const safeData = Array.isArray(data) ? data : [];
   const activeColor = getStatusColor(status);
-  const payingDaysCount = data.filter((d) => d.status === 'PAYING').length;
-  const uptimePercent = Math.round((payingDaysCount / data.length) * 100);
+  const payingDaysCount = safeData.filter((d) => d.status === 'PAYING').length;
+  const uptimePercent = safeData.length > 0 ? Math.round((payingDaysCount / safeData.length) * 100) : 100;
 
   // Custom tooltip for Recharts sparkline
   const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+    if (active && Array.isArray(payload) && payload.length > 0 && payload[0]?.payload) {
       const d: StatusPoint = payload[0].payload;
       const colorInfo = getStatusColor(d.status);
 
@@ -178,7 +179,7 @@ export const StatusSparkline: React.FC<StatusSparklineProps> = ({
       <div className="flex items-center gap-2">
         <div style={{ width: 90, height: 28 }} className="overflow-hidden">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data} margin={{ top: 2, right: 2, bottom: 2, left: 2 }}>
+            <AreaChart data={safeData} margin={{ top: 2, right: 2, bottom: 2, left: 2 }}>
               <defs>
                 <linearGradient id={`miniSparkGrad-${status}`} x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor={activeColor.stroke} stopOpacity={0.4} />
@@ -220,7 +221,7 @@ export const StatusSparkline: React.FC<StatusSparklineProps> = ({
           </span>
           <span className="text-slate-400">•</span>
           <span className="text-slate-300 font-mono font-semibold">
-            {data.length} telemetry checks
+            {safeData.length} telemetry checks
           </span>
         </div>
       </div>
@@ -228,7 +229,7 @@ export const StatusSparkline: React.FC<StatusSparklineProps> = ({
       {/* Sparkline Chart Container */}
       <div style={{ width, height }} className="w-full relative select-none">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 6, right: 6, bottom: 2, left: 6 }}>
+          <AreaChart data={safeData} margin={{ top: 6, right: 6, bottom: 2, left: 6 }}>
             <defs>
               <linearGradient id={`statusGrad-${status}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={activeColor.stroke} stopOpacity={0.45} />

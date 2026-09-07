@@ -18,13 +18,13 @@ export const WatchlistPage: React.FC<{ navigate: (path: string) => void }> = ({ 
     }
     api
       .getWatchlist()
-      .then((res) => setWatchlist(res.watchlist))
+      .then((res) => setWatchlist(Array.isArray(res?.watchlist) ? res.watchlist : []))
       .finally(() => setLoading(false));
   }, [user]);
 
   const handleWatchToggle = (projectId: string, isWatched: boolean) => {
     if (!isWatched) {
-      setWatchlist((prev) => prev.filter((p) => p.id !== projectId));
+      setWatchlist((prev) => (prev || []).filter((p) => p.id !== projectId));
     }
   };
 
@@ -47,7 +47,7 @@ export const WatchlistPage: React.FC<{ navigate: (path: string) => void }> = ({ 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <CardSkeleton /><CardSkeleton /><CardSkeleton /><CardSkeleton />
         </div>
-      ) : watchlist.length > 0 ? (
+      ) : (watchlist || []).length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {watchlist.map((p) => (
             <ProjectCard

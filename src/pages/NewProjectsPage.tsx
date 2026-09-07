@@ -17,8 +17,8 @@ export const NewProjectsPage: React.FC<{ navigate: (path: string) => void }> = (
     api
       .getProjects({ page: page.toString(), limit: '12' })
       .then((res) => {
-        setProjects(res.projects);
-        setTotalPages(res.pagination.totalPages);
+        setProjects(Array.isArray(res?.projects) ? res.projects : []);
+        setTotalPages(res?.pagination?.totalPages || 1);
       })
       .finally(() => setLoading(false));
   }, [page]);
@@ -44,7 +44,7 @@ export const NewProjectsPage: React.FC<{ navigate: (path: string) => void }> = (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <CardSkeleton /><CardSkeleton /><CardSkeleton /><CardSkeleton />
         </div>
-      ) : projects.length > 0 ? (
+      ) : (projects || []).length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {projects.map((p) => (
             <ProjectCard key={p.id} project={p} navigate={navigate} />
@@ -72,8 +72,8 @@ export const PayingProjectsPage: React.FC<{ navigate: (path: string) => void }> 
     api
       .getProjects({ status: 'PAYING', page: page.toString(), limit: '12' })
       .then((res) => {
-        setProjects(res.projects);
-        setTotalPages(res.pagination.totalPages);
+        setProjects(Array.isArray(res?.projects) ? res.projects : []);
+        setTotalPages(res?.pagination?.totalPages || 1);
       })
       .finally(() => setLoading(false));
   }, [page]);
@@ -99,7 +99,7 @@ export const PayingProjectsPage: React.FC<{ navigate: (path: string) => void }> 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <CardSkeleton /><CardSkeleton /><CardSkeleton /><CardSkeleton />
         </div>
-      ) : projects.length > 0 ? (
+      ) : (projects || []).length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {projects.map((p) => (
             <ProjectCard key={p.id} project={p} navigate={navigate} />
@@ -127,8 +127,8 @@ export const ProblemProjectsPage: React.FC<{ navigate: (path: string) => void }>
     api
       .getProjects({ status: 'PROBLEMATIC', page: page.toString(), limit: '12' })
       .then((res) => {
-        setProjects(res.projects);
-        setTotalPages(res.pagination.totalPages);
+        setProjects(Array.isArray(res?.projects) ? res.projects : []);
+        setTotalPages(res?.pagination?.totalPages || 1);
       })
       .finally(() => setLoading(false));
   }, [page]);
@@ -156,7 +156,7 @@ export const ProblemProjectsPage: React.FC<{ navigate: (path: string) => void }>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <CardSkeleton /><CardSkeleton /><CardSkeleton /><CardSkeleton />
         </div>
-      ) : projects.length > 0 ? (
+      ) : (projects || []).length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {projects.map((p) => (
             <ProjectCard key={p.id} project={p} navigate={navigate} />

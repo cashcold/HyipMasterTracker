@@ -45,9 +45,9 @@ export const HyipsPage: React.FC<HyipsPageProps> = ({ navigate, initialStatus })
         page: page.toString(),
         limit: '15',
       });
-      setProjects(res.projects);
-      setTotalPages(res.pagination.totalPages);
-      setTotalCount(res.pagination.total);
+      setProjects(Array.isArray(res?.projects) ? res.projects : []);
+      setTotalPages(res?.pagination?.totalPages || 1);
+      setTotalCount(res?.pagination?.total || 0);
     } catch (err) {
       console.error('Failed to fetch projects:', err);
     } finally {
@@ -237,7 +237,7 @@ export const HyipsPage: React.FC<HyipsPageProps> = ({ navigate, initialStatus })
           <div className="bg-white border-x border-b border-[#cbd5e1] rounded-b-sm shadow-xs divide-y divide-[#e2e8f0]">
             {loading ? (
               <div className="p-8 text-center text-xs text-[#64748b]">Loading programs...</div>
-            ) : projects.length > 0 ? (
+            ) : (projects || []).length > 0 ? (
               projects.map((p) => (
                 <ProjectCard key={p.id} project={p} navigate={navigate} />
               ))

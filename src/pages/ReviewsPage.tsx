@@ -22,8 +22,8 @@ export const ReviewsPage: React.FC<{ navigate: (path: string) => void }> = ({ na
         limit: '15',
       })
       .then((res) => {
-        setReviews(res.reviews);
-        setTotalPages(Math.ceil(res.total / 15) || 1);
+        setReviews(Array.isArray(res?.reviews) ? res.reviews : []);
+        setTotalPages(Math.ceil((res?.total || 0) / 15) || 1);
       })
       .finally(() => setLoading(false));
   }, [category, page]);
@@ -94,7 +94,7 @@ export const ReviewsPage: React.FC<{ navigate: (path: string) => void }> = ({ na
       <div className="space-y-3">
         {loading ? (
           <div className="p-12 text-center text-slate-400 text-xs">Loading community reviews...</div>
-        ) : reviews.length > 0 ? (
+        ) : (reviews || []).length > 0 ? (
           reviews.map((rev) => (
             <div
               key={rev.id}
@@ -162,13 +162,13 @@ export const NotificationsPage: React.FC<{ navigate: (path: string) => void }> =
     }
     api
       .getNotifications()
-      .then((res) => setNotifications(res.notifications))
+      .then((res) => setNotifications(Array.isArray(res?.notifications) ? res.notifications : []))
       .finally(() => setLoading(false));
   }, [user]);
 
   const handleMarkAllRead = async () => {
     await api.markNotificationRead('all');
-    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+    setNotifications((prev) => (prev || []).map((n) => ({ ...n, isRead: true })));
   };
 
   return (
@@ -186,7 +186,7 @@ export const NotificationsPage: React.FC<{ navigate: (path: string) => void }> =
       <div className="bg-[#111827] border border-slate-800 rounded-xl divide-y divide-slate-800/60 overflow-hidden shadow-lg">
         {loading ? (
           <div className="p-12 text-center text-slate-400 text-xs">Loading notifications...</div>
-        ) : notifications.length > 0 ? (
+        ) : (notifications || []).length > 0 ? (
           notifications.map((n) => (
             <div
               key={n.id}

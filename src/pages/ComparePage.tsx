@@ -15,11 +15,12 @@ export const ComparePage: React.FC<{ navigate: (path: string) => void }> = ({ na
   // Initial load
   useEffect(() => {
     api.getProjects({ limit: '50' }).then((res) => {
-      setAllProjects(res.projects);
-      if (res.projects.length >= 2) {
-        setSelectedSlugs([res.projects[0].slug, res.projects[1].slug]);
+      const projs = Array.isArray(res?.projects) ? res.projects : [];
+      setAllProjects(projs);
+      if (projs.length >= 2) {
+        setSelectedSlugs([projs[0].slug, projs[1].slug]);
       }
-    });
+    }).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const ComparePage: React.FC<{ navigate: (path: string) => void }> = ({ na
     setLoading(true);
     api
       .compareProjects(selectedSlugs)
-      .then((res) => setComparedProjects(res.projects))
+      .then((res) => setComparedProjects(Array.isArray(res?.projects) ? res.projects : []))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [selectedSlugs]);

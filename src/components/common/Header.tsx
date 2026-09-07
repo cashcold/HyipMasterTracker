@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, navigate }) => {
       setSearchLoading(true);
       try {
         const res = await api.getProjects({ search: searchQuery.trim(), limit: '6' });
-        setSearchResults(res.projects);
+        setSearchResults(Array.isArray(res?.projects) ? res.projects : []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -213,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, navigate }) => {
                     {searchLoading && <span className="text-blue-600">Searching...</span>}
                   </div>
                   <div className="max-h-60 overflow-y-auto divide-y divide-[#f1f5f9]">
-                    {searchResults.length > 0 ? (
+                    {(searchResults || []).length > 0 ? (
                       searchResults.map((p) => (
                         <button
                           key={p.id}

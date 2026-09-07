@@ -4,7 +4,7 @@ import { createServer as createViteServer } from 'vite';
 import { app } from './server/app.ts';
 
 async function startServer() {
-  const PORT = Number(process.env.PORT) || 3000;
+  const PORT = 3000;
 
   // Vite middleware for development vs Static serving for production
   if (process.env.NODE_ENV !== 'production') {

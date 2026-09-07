@@ -8,6 +8,7 @@ interface Props {
 interface State {
   hasError: boolean;
   error: Error | null;
+  errorInfo: React.ErrorInfo | null;
 }
 
 export class ErrorBoundary extends React.Component<Props, State> {
@@ -16,19 +17,21 @@ export class ErrorBoundary extends React.Component<Props, State> {
     this.state = {
       hasError: false,
       error: null,
+      errorInfo: null,
     };
   }
 
-  public static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(error: Error): Partial<State> {
     return { hasError: true, error };
   }
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('[ErrorBoundary] Caught render error:', error, errorInfo);
+    this.setState({ errorInfo });
   }
 
   public handleReset = () => {
-    this.setState({ hasError: false, error: null });
+    this.setState({ hasError: false, error: null, errorInfo: null });
     window.location.reload();
   };
 
@@ -36,7 +39,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-[#090d16] text-slate-100 flex items-center justify-center p-4">
-          <div className="max-w-md w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl text-center space-y-4">
+          <div className="max-w-xl w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl text-center space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mx-auto">
               <AlertTriangle className="w-7 h-7" />
             </div>
@@ -45,8 +48,18 @@ export class ErrorBoundary extends React.Component<Props, State> {
               An unexpected render issue was safely caught. You can reload the application or return to the directory.
             </p>
             {this.state.error && (
-              <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-rose-400 text-left overflow-x-auto max-h-32">
-                {this.state.error.message}
+              <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-mono text-rose-400 text-left overflow-x-auto max-h-48 whitespace-pre-wrap">
+                <div className="font-bold pb-1 text-rose-300">{this.state.error.message}</div>
+                {this.state.error.stack && (
+                  <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800">
+                    {this.state.error.stack}
+                  </div>
+                )}
+                {this.state.errorInfo?.componentStack && (
+                  <div className="text-[10px] text-amber-400/80 pt-1 border-t border-slate-800">
+                    {this.state.errorInfo.componentStack}
+                  </div>
+                )}
               </div>
             )}
             <div className="flex items-center justify-center gap-2 pt-2">

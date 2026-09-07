@@ -48,27 +48,41 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
     api
       .getProjects({ limit: '7' })
       .then((res) => {
-        setNewProjects(res.projects);
-        setMonitoringProjects(res.projects.slice(0, 3));
+        if (res && Array.isArray(res.projects)) {
+          setNewProjects(res.projects);
+          setMonitoringProjects(res.projects.slice(0, 3));
+        }
       })
       .catch(() => {});
 
     // Latest Reviews
     api
       .getReviews({ limit: '5' })
-      .then((res) => setLatestReviews(res.reviews))
+      .then((res) => {
+        if (res && Array.isArray(res.reviews)) {
+          setLatestReviews(res.reviews);
+        }
+      })
       .catch(() => {});
 
     // Latest Events
     api
       .getEvents({ limit: '6' })
-      .then((res) => setLatestEvents(res.events))
+      .then((res) => {
+        if (res && Array.isArray(res.events)) {
+          setLatestEvents(res.events);
+        }
+      })
       .catch(() => {});
 
     // Problem / Scam Projects
     api
       .getProjects({ status: 'PROBLEMATIC', limit: '6' })
-      .then((res) => setProblemProjects(res.projects))
+      .then((res) => {
+        if (res && Array.isArray(res.projects)) {
+          setProblemProjects(res.projects);
+        }
+      })
       .catch(() => {});
   };
 
@@ -110,7 +124,7 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
       </div>
 
       {/* 2. MONITORING WIDGET (when shown on details page or home) */}
-      {showMonitoring && monitoringProjects.length > 0 && (
+      {showMonitoring && (monitoringProjects || []).length > 0 && (
         <div className="bg-white border border-[#cbd5e1] rounded-sm shadow-xs overflow-hidden">
           <div className="bg-[#1e293b] text-white px-3 py-1.5 font-bold text-xs uppercase tracking-wide text-center flex items-center justify-center gap-1.5">
             <div className="w-4 h-4 rounded-full overflow-hidden border border-sky-400 inline-block shrink-0 goofy-img-animated-3">
@@ -120,7 +134,7 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
             <span>Active Monitoring</span>
           </div>
           <div className="divide-y divide-[#f1f5f9]">
-            {monitoringProjects.map((p) => (
+            {(monitoringProjects || []).map((p) => (
               <div
                 key={p.id}
                 onClick={() => navigate(`/hyips/${p.slug}`)}
@@ -147,7 +161,7 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
           <span>New Opportunities</span>
         </div>
         <div className="divide-y divide-[#f1f5f9]">
-          {newProjects.length > 0 ? (
+          {(newProjects || []).length > 0 ? (
             newProjects.map((p) => (
               <div
                 key={p.id}
@@ -181,7 +195,7 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
           <span>Investor Feedback</span>
         </div>
         <div className="divide-y divide-[#f1f5f9]">
-          {latestReviews.length > 0 ? (
+          {(latestReviews || []).length > 0 ? (
             latestReviews.map((rev) => (
               <div
                 key={rev.id}
@@ -210,7 +224,7 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
           <span>Latest Ledger Events</span>
         </div>
         <div className="divide-y divide-[#f1f5f9]">
-          {latestEvents.length > 0 ? (
+          {(latestEvents || []).length > 0 ? (
             latestEvents.map((evt) => (
               <div
                 key={evt.id}
@@ -267,7 +281,7 @@ export const SidebarWidgets: React.FC<SidebarWidgetsProps> = ({
           </span>
         </div>
         <div className="divide-y divide-[#f1f5f9]">
-          {problemProjects.length > 0 ? (
+          {(problemProjects || []).length > 0 ? (
             problemProjects.map((p) => (
               <div
                 key={p.id}
