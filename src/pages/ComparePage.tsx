@@ -226,7 +226,7 @@ export const ComparePage: React.FC<{ navigate: (path: string) => void }> = ({ na
                     <td key={p.id} className="p-4 border-l border-slate-800">
                       <span className="font-bold text-amber-400 flex items-center gap-1">
                         <Star className="w-3.5 h-3.5 fill-amber-400" />
-                        {p.rating?.toFixed(1) || '7.0'} / 10 ({p.reviewCount || 0} reviews)
+                        {(typeof p.rating === 'number' ? p.rating.toFixed(1) : Number(p.rating) ? Number(p.rating).toFixed(1) : '7.0')} / 10 ({p.reviewCount || 0} reviews)
                       </span>
                     </td>
                   ))}

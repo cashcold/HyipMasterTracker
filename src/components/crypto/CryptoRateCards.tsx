@@ -35,20 +35,55 @@ export const CryptoRateCards: React.FC<CryptoRateCardsProps> = ({
   const [activeCategory, setActiveCategory] = useState<'ALL' | 'STABLE' | 'L1' | 'PRIVACY' | 'POPULAR'>('ALL');
   const [selectedCoinDetail, setSelectedCoinDetail] = useState<ICryptoRate | null>(null);
 
-  // Helper to format currency numbers
-  const formatMoney = (val: number) => {
-    if (val >= 1_000_000_000_000) return `$${(val / 1_000_000_000_000).toFixed(2)}T`;
-    if (val >= 1_000_000_000) return `$${(val / 1_000_000_000).toFixed(2)}B`;
-    if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(2)}M`;
-    return `$${val.toLocaleString()}`;
+  // Helper to safely format crypto price numbers
+  const formatCryptoPrice = (price: any): string => {
+    const p = typeof price === 'number' && Number.isFinite(price) ? price : Number(price);
+    if (!Number.isFinite(p) || p <= 0) return '0.00';
+    if (p >= 1000) return p.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (p >= 1) return p.toFixed(2);
+    return p.toFixed(4);
   };
 
-  // Filter rates based on category & search
-  const filteredRates = rates.filter((c) => {
+  // Helper to format currency numbers
+  const formatMoney = (val: any) => {
+    const num = typeof val === 'number' && Number.isFinite(val) ? val : Number(val);
+    if (!Number.isFinite(num) || num <= 0) return '$0';
+    if (num >= 1_000_000_000_000) return `$${(num / 1_000_000_000_000).toFixed(2)}T`;
+    if (num >= 1_000_000_000) return `$${(num / 1_000_000_000).toFixed(2)}B`;
+    if (num >= 1_000_000) return `$${(num / 1_000_000).toFixed(2)}M`;
+    return `$${num.toLocaleString()}`;
+  };
+
+  // Filter and normalize rates based on category & search
+  const normalizedRates = (rates || []).map((c: any) => {
+    const pUsd = typeof c.priceUsd === 'number' ? c.priceUsd : typeof c.price === 'number' ? c.price : 0;
+    const l24 = typeof c.low24h === 'number' ? c.low24h : pUsd * 0.98;
+    const h24 = typeof c.high24h === 'number' ? c.high24h : pUsd * 1.02;
+    return {
+      id: c.id || (c.symbol ? c.symbol.toLowerCase() : 'coin'),
+      name: c.name || c.symbol || 'Cryptocurrency',
+      symbol: c.symbol || 'COIN',
+      priceUsd: pUsd,
+      change24h: typeof c.change24h === 'number' ? c.change24h : 0,
+      high24h: h24,
+      low24h: l24,
+      volume24h: typeof c.volume24h === 'number' ? c.volume24h : 0,
+      marketCap: typeof c.marketCap === 'number' ? c.marketCap : 0,
+      sparkline: Array.isArray(c.sparkline) && c.sparkline.length > 1 ? c.sparkline : [pUsd * 0.98, pUsd, pUsd * 1.01],
+      iconColor: c.iconColor || '#3b82f6',
+      iconSymbol: c.iconSymbol || (c.symbol ? c.symbol.slice(0, 1) : '₿'),
+      network: c.network || 'Mainnet',
+      confirmationTime: c.confirmationTime || 'Instant (~1-5m)',
+      avgFee: c.avgFee || '<$1.00',
+      popularityRank: typeof c.popularityRank === 'number' ? c.popularityRank : 99,
+    };
+  });
+
+  const filteredRates = normalizedRates.filter((c) => {
     const matchesSearch =
-      c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.network.toLowerCase().includes(searchTerm.toLowerCase());
+      (c.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (c.symbol || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (c.network || '').toLowerCase().includes(searchTerm.toLowerCase());
 
     if (!matchesSearch) return false;
 
@@ -69,24 +104,30 @@ export const CryptoRateCards: React.FC<CryptoRateCardsProps> = ({
 
   // Calculate range percentage for 24h High/Low bar
   const getRangePercentage = (price: number, low: number, high: number) => {
-    if (high <= low) return 50;
-    const pct = ((price - low) / (high - low)) * 100;
+    const p = Number(price) || 0;
+    const l = Number(low) || 0;
+    const h = Number(high) || 0;
+    if (h <= l) return 50;
+    const pct = ((p - l) / (h - l)) * 100;
     return Math.min(Math.max(pct, 5), 95);
   };
 
   // Generate SVG path for sparkline
   const renderSparkline = (points: number[], isPositive: boolean) => {
     if (!points || points.length < 2) return null;
-    const min = Math.min(...points);
-    const max = Math.max(...points);
+    const validPoints = points.map((p) => Number(p) || 0);
+    const min = Math.min(...validPoints);
+    const max = Math.max(...validPoints);
     const range = max - min || 1;
     const width = 110;
     const height = 32;
 
-    const coords = points.map((val, idx) => {
-      const x = (idx / (points.length - 1)) * width;
+    const coords = validPoints.map((val, idx) => {
+      const x = (idx / Math.max(1, validPoints.length - 1)) * width;
       const y = height - ((val - min) / range) * (height - 6) - 3;
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
+      const safeX = Number.isFinite(x) ? x.toFixed(1) : '0';
+      const safeY = Number.isFinite(y) ? y.toFixed(1) : '0';
+      return `${safeX},${safeY}`;
     });
 
     const strokeColor = isPositive ? '#10b981' : '#f43f5e';
@@ -236,7 +277,7 @@ export const CryptoRateCards: React.FC<CryptoRateCardsProps> = ({
                       Spot Price
                     </span>
                     <div className={`font-mono font-black text-lg leading-none ${isDarkTheme ? 'text-white' : 'text-[#0f172a]'}`}>
-                      ${coin.priceUsd >= 1000 ? coin.priceUsd.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : coin.priceUsd >= 1 ? coin.priceUsd.toFixed(2) : coin.priceUsd.toFixed(4)}
+                      ${formatCryptoPrice(coin.priceUsd)}
                     </div>
                   </div>
 
@@ -249,8 +290,8 @@ export const CryptoRateCards: React.FC<CryptoRateCardsProps> = ({
                 {/* 24h High / Low Range Indicator Bar */}
                 <div className={`space-y-1 my-2 p-1.5 rounded border ${isDarkTheme ? 'bg-slate-900/90 border-slate-800' : 'bg-[#f8fafc] border-[#e2e8f0]'}`}>
                   <div className={`flex justify-between text-[10px] font-mono ${isDarkTheme ? 'text-slate-400' : 'text-[#64748b]'}`}>
-                    <span>24h L: ${coin.low24h >= 1000 ? coin.low24h.toLocaleString() : coin.low24h}</span>
-                    <span>24h H: ${coin.high24h >= 1000 ? coin.high24h.toLocaleString() : coin.high24h}</span>
+                    <span>24h L: ${formatCryptoPrice(coin.low24h)}</span>
+                    <span>24h H: ${formatCryptoPrice(coin.high24h)}</span>
                   </div>
                   <div className={`w-full h-1.5 rounded-full overflow-hidden relative ${isDarkTheme ? 'bg-slate-800' : 'bg-slate-200'}`}>
                     <div
@@ -373,7 +414,7 @@ export const CryptoRateCards: React.FC<CryptoRateCardsProps> = ({
               <div className="bg-slate-50 p-2.5 rounded border border-slate-200">
                 <span className="text-[10px] text-slate-500 uppercase font-bold block">Spot Price</span>
                 <span className="text-sm font-mono font-black text-slate-900">
-                  ${selectedCoinDetail.priceUsd.toLocaleString()}
+                  ${formatCryptoPrice(selectedCoinDetail.priceUsd)}
                 </span>
               </div>
               <div className="bg-slate-50 p-2.5 rounded border border-slate-200">

@@ -55,7 +55,7 @@ export const MonitorsPage: React.FC<{ navigate: (path: string) => void }> = ({ n
               <div className="grid grid-cols-2 gap-2 pt-3 border-t border-slate-800 text-xs">
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Trust Index</span>
-                  <span className="text-base font-black text-emerald-400">{m.trustScore.toFixed(1)} / 10.0</span>
+                  <span className="text-base font-black text-emerald-400">{(Number(m.trustScore) || 0).toFixed(1)} / 10.0</span>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Projects Monitored</span>

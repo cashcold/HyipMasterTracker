@@ -583,8 +583,8 @@ export const AdminDashboard: React.FC<{ navigate: (path: string) => void }> = ({
                         <StatusBadge status={p.status} size="sm" />
                       </td>
                       <td className="p-3.5 font-bold">
-                        <span className={p.riskScore >= 7 ? 'text-emerald-400' : p.riskScore >= 4 ? 'text-amber-400' : 'text-rose-400'}>
-                          {p.riskScore.toFixed(1)} / 10
+                        <span className={(p.riskScore ?? 0) >= 7 ? 'text-emerald-400' : (p.riskScore ?? 0) >= 4 ? 'text-amber-400' : 'text-rose-400'}>
+                          {(Number(p.riskScore) || 0).toFixed(1)} / 10
                         </span>
                       </td>
                       <td className="p-3.5">{p.lifetimeDays}d</td>
@@ -773,7 +773,7 @@ export const AdminDashboard: React.FC<{ navigate: (path: string) => void }> = ({
               <div key={m.id} className="bg-[#111827] border border-slate-800 rounded-xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-white text-sm">{m.name}</h3>
-                  <span className="text-xs text-emerald-400 font-black">{m.trustScore.toFixed(1)}/10</span>
+                  <span className="text-xs text-emerald-400 font-black">{(Number(m.trustScore) || 0).toFixed(1)}/10</span>
                 </div>
                 <p className="text-xs text-slate-400">{m.website}</p>
                 <p className="text-xs text-slate-300">{m.description}</p>

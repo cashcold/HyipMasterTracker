@@ -162,7 +162,11 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
     ? `https://${rawUrl}`
     : '#';
 
-  const scoreValue = project.riskScore ? project.riskScore.toFixed(1) : '7.2';
+  const scoreValue = typeof project.riskScore === 'number'
+    ? project.riskScore.toFixed(1)
+    : Number(project.riskScore)
+    ? Number(project.riskScore).toFixed(1)
+    : '7.2';
   const numScore = parseFloat(scoreValue);
 
   // Review breakdown estimates
@@ -1265,7 +1269,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
 
                 <div className="text-right">
                   <span className="px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-black text-[10px] uppercase">
-                    Risk: {project.riskScore ? project.riskScore.toFixed(1) : '7.5'}/10
+                    Risk: {typeof project.riskScore === 'number' ? project.riskScore.toFixed(1) : Number(project.riskScore) ? Number(project.riskScore).toFixed(1) : '7.5'}/10
                   </span>
                   <span className="block text-[9px] text-slate-400 mt-0.5">HyipMasterTracker</span>
                 </div>

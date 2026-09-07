@@ -146,6 +146,15 @@ const DEFAULT_TICKER_RATES: ICryptoRate[] = [
   },
 ];
 
+// Safe formatter for crypto prices
+const formatCryptoPrice = (price: any): string => {
+  const p = typeof price === 'number' && Number.isFinite(price) ? price : Number(price);
+  if (!Number.isFinite(p) || p <= 0) return '0.00';
+  if (p >= 1000) return p.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  if (p >= 1) return p.toFixed(2);
+  return p.toFixed(4);
+};
+
 export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto }) => {
   const [rates, setRates] = useState<ICryptoRate[]>(DEFAULT_TICKER_RATES);
   const [loading, setLoading] = useState(false);
@@ -165,7 +174,21 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
       if (isManual) setRefreshing(true);
       const res = await api.getCryptoRates();
       if (res && Array.isArray(res.rates) && res.rates.length > 0) {
-        setRates(res.rates);
+        const safeRates: ICryptoRate[] = res.rates.map((c: any) => {
+          const pUsd = typeof c.priceUsd === 'number' ? c.priceUsd : typeof c.price === 'number' ? c.price : 0;
+          return {
+            ...c,
+            priceUsd: pUsd,
+            change24h: typeof c.change24h === 'number' ? c.change24h : 0,
+            name: c.name || c.symbol || 'Cryptocurrency',
+            symbol: c.symbol || 'COIN',
+            network: c.network || 'Mainnet',
+            iconColor: c.iconColor || '#3b82f6',
+            iconSymbol: c.iconSymbol || (c.symbol ? c.symbol.slice(0, 1) : '₿'),
+            avgFee: c.avgFee || '<$1.00',
+          };
+        });
+        setRates(safeRates);
         setLastUpdated(
           new Date(res.lastUpdated || Date.now()).toLocaleTimeString([], {
             hour: '2-digit',
@@ -179,10 +202,12 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
       setRates((prev) =>
         prev.map((c) => {
           if (c.symbol === 'USDT' || c.symbol === 'USDC') return c;
-          const delta = (Math.random() - 0.5) * 0.0008 * c.priceUsd;
+          const currentPrice = typeof c.priceUsd === 'number' && Number.isFinite(c.priceUsd) ? c.priceUsd : 0;
+          const delta = (Math.random() - 0.5) * 0.0008 * currentPrice;
+          const newPrice = currentPrice + delta;
           return {
             ...c,
-            priceUsd: Number((c.priceUsd + delta).toFixed(c.priceUsd < 1 ? 4 : 2)),
+            priceUsd: Number(newPrice.toFixed(newPrice < 1 ? 4 : 2)),
           };
         })
       );
@@ -206,11 +231,14 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
   // Update converter calculation
   useEffect(() => {
     const current = rates.find((r) => r.symbol === selectedCoin);
-    if (current && current.priceUsd > 0 && usdAmount) {
+    const p = current && typeof current.priceUsd === 'number' ? current.priceUsd : 0;
+    if (p > 0 && usdAmount) {
       const parsedUsd = parseFloat(usdAmount);
-      if (!isNaN(parsedUsd)) {
-        const val = parsedUsd / current.priceUsd;
-        setCryptoAmount(val < 0.0001 ? val.toFixed(8) : val < 1 ? val.toFixed(6) : val.toFixed(4));
+      if (!isNaN(parsedUsd) && parsedUsd >= 0) {
+        const val = parsedUsd / p;
+        if (Number.isFinite(val)) {
+          setCryptoAmount(val < 0.0001 ? val.toFixed(8) : val < 1 ? val.toFixed(6) : val.toFixed(4));
+        }
       }
     }
   }, [selectedCoin, usdAmount, rates]);
@@ -218,10 +246,14 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
   const handleCryptoChange = (cryptoVal: string) => {
     setCryptoAmount(cryptoVal);
     const current = rates.find((r) => r.symbol === selectedCoin);
-    if (current && current.priceUsd > 0) {
+    const p = current && typeof current.priceUsd === 'number' ? current.priceUsd : 0;
+    if (p > 0) {
       const parsedCrypto = parseFloat(cryptoVal);
-      if (!isNaN(parsedCrypto)) {
-        setUsdAmount((parsedCrypto * current.priceUsd).toFixed(2));
+      if (!isNaN(parsedCrypto) && parsedCrypto >= 0) {
+        const usdVal = parsedCrypto * p;
+        if (Number.isFinite(usdVal)) {
+          setUsdAmount(usdVal.toFixed(2));
+        }
       }
     }
   };
@@ -282,7 +314,7 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
                 <span className="font-bold text-slate-100">{crypto.symbol}</span>
 
                 <span className="font-mono text-slate-300 font-semibold">
-                  ${crypto.priceUsd >= 1000 ? crypto.priceUsd.toLocaleString(undefined, { maximumFractionDigits: 2 }) : crypto.priceUsd >= 1 ? crypto.priceUsd.toFixed(2) : crypto.priceUsd.toFixed(4)}
+                  ${formatCryptoPrice(crypto.priceUsd)}
                 </span>
 
                 <span
@@ -402,7 +434,7 @@ export const CryptoTickerBar: React.FC<CryptoTickerBarProps> = ({ onSelectCrypto
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-mono font-bold text-slate-100">${active.priceUsd.toLocaleString()}</div>
+                    <div className="font-mono font-bold text-slate-100">${formatCryptoPrice(active.priceUsd)}</div>
                     <div className={`text-[10px] font-mono font-bold ${active.change24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                       {active.change24h >= 0 ? '+' : ''}{active.change24h}% (24h)
                     </div>

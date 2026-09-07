@@ -108,11 +108,24 @@ export const CryptoPaymentSection: React.FC<CryptoPaymentSectionProps> = ({
   };
 
   const coinRate = getSelectedCoinRate(calcCoin);
-  const cryptoDepositAmount = coinRate > 0 ? (calcUsdAmount / coinRate) : calcUsdAmount;
-  const dailyReturnUsd = (calcUsdAmount * calcDailyRoiPercent) / 100;
+  const safeUsd = typeof calcUsdAmount === 'number' && Number.isFinite(calcUsdAmount) ? calcUsdAmount : Number(calcUsdAmount) || 0;
+  const safeRate = typeof coinRate === 'number' && Number.isFinite(coinRate) && coinRate > 0 ? coinRate : 1.0;
+  const cryptoDepositAmount = safeUsd / safeRate;
+  const dailyReturnUsd = (safeUsd * calcDailyRoiPercent) / 100;
   const totalProfitUsd = dailyReturnUsd * calcDays;
-  const totalPayoutUsd = calcUsdAmount + totalProfitUsd;
-  const dailyReturnCrypto = coinRate > 0 ? (dailyReturnUsd / coinRate) : dailyReturnUsd;
+  const totalPayoutUsd = safeUsd + totalProfitUsd;
+  const dailyReturnCrypto = dailyReturnUsd / safeRate;
+
+  const toFixedSafe = (val: any, digits = 2): string => {
+    const n = typeof val === 'number' && Number.isFinite(val) ? val : Number(val);
+    return Number.isFinite(n) ? n.toFixed(digits) : '0.00';
+  };
+
+  const formatCryptoAmt = (val: any): string => {
+    const n = typeof val === 'number' && Number.isFinite(val) ? val : Number(val);
+    if (!Number.isFinite(n) || n <= 0) return '0.00';
+    return n < 1 ? n.toFixed(6) : n.toFixed(4);
+  };
 
   return (
     <div className="space-y-3">
@@ -418,28 +431,28 @@ export const CryptoPaymentSection: React.FC<CryptoPaymentSectionProps> = ({
               <div className="flex items-center justify-between pb-1.5 border-b border-[#e2e8f0]">
                 <span className="text-[#64748b] font-semibold">Deposit in {calcCoin}:</span>
                 <span className="font-mono font-black text-[#1e293b] text-sm">
-                  {cryptoDepositAmount < 1 ? cryptoDepositAmount.toFixed(6) : cryptoDepositAmount.toFixed(4)} {calcCoin.split(' ')[0]}
+                  {formatCryptoAmt(cryptoDepositAmount)} {calcCoin.split(' ')[0]}
                 </span>
               </div>
 
               <div className="flex items-center justify-between text-[11px]">
                 <span className="text-[#64748b]">Daily Profit:</span>
                 <span className="font-mono font-bold text-[#16a34a]">
-                  +${dailyReturnUsd.toFixed(2)} ({dailyReturnCrypto < 1 ? dailyReturnCrypto.toFixed(6) : dailyReturnCrypto.toFixed(4)} {calcCoin.split(' ')[0]})
+                  +${toFixedSafe(dailyReturnUsd, 2)} ({formatCryptoAmt(dailyReturnCrypto)} {calcCoin.split(' ')[0]})
                 </span>
               </div>
 
               <div className="flex items-center justify-between text-[11px]">
                 <span className="text-[#64748b]">Total Net Profit ({calcDays} Days):</span>
                 <span className="font-mono font-bold text-[#15803d]">
-                  +${totalProfitUsd.toFixed(2)} ({(calcDailyRoiPercent * calcDays).toFixed(0)}%)
+                  +${toFixedSafe(totalProfitUsd, 2)} ({toFixedSafe(calcDailyRoiPercent * calcDays, 0)}%)
                 </span>
               </div>
 
               <div className="flex items-center justify-between pt-1 border-t border-[#e2e8f0]">
                 <span className="text-[#1e293b] font-bold">Total Return (Principal + Profit):</span>
                 <span className="font-mono font-black text-[#0284c7] text-sm">
-                  ${totalPayoutUsd.toFixed(2)}
+                  ${toFixedSafe(totalPayoutUsd, 2)}
                 </span>
               </div>
             </div>

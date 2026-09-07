@@ -188,7 +188,7 @@ export const StatisticsPage: React.FC<{ navigate: (path: string) => void }> = ({
                       <span>{statusName}</span>
                     </span>
                     <span className="text-slate-400 font-mono">
-                      {count} <strong className="text-slate-200 font-semibold">({pct.toFixed(1)}%)</strong>
+                      {count} <strong className="text-slate-200 font-semibold">({(Number(pct) || 0).toFixed(1)}%)</strong>
                     </span>
                   </div>
                   <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden">
@@ -225,7 +225,7 @@ export const StatisticsPage: React.FC<{ navigate: (path: string) => void }> = ({
                       <span>{label} {range}</span>
                     </span>
                     <span className="text-slate-400 font-mono">
-                      {count} <strong className="text-slate-200 font-semibold">({pct.toFixed(1)}%)</strong>
+                      {count} <strong className="text-slate-200 font-semibold">({(Number(pct) || 0).toFixed(1)}%)</strong>
                     </span>
                   </div>
                   <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden">

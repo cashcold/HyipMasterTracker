@@ -267,7 +267,7 @@ export const GlobalMarketActivityChart: React.FC<GlobalMarketActivityChartProps>
       .axisLeft(yScale)
       .ticks(5)
       .tickFormat((d) => {
-        const num = d as number;
+        const num = typeof d === 'number' && Number.isFinite(d) ? d : Number(d) || 0;
         if (metric === 'inflowCount') return `${num}`;
         if (num >= 1000000) return `$${(num / 1000000).toFixed(1)}M`;
         if (num >= 1000) return `$${(num / 1000).toFixed(0)}k`;
