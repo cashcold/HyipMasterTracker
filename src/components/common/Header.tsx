@@ -21,6 +21,7 @@ import {
   Activity,
   AlertTriangle,
   Radio,
+  Users,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.tsx';
 import { api } from '../../services/api.ts';
@@ -244,27 +245,27 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, navigate }) => {
               )}
             </div>
 
-            {/* Direct Telegram & WhatsApp Contact Links */}
+            {/* Direct Telegram Admin & Group Links */}
             <div className="flex items-center gap-1.5">
               <a
                 href="https://t.me/hyipmastertracker"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded bg-[#0088cc] hover:bg-[#0077b5] text-white cursor-pointer transition-colors shadow-xs"
-                title="Contact Support on Telegram"
+                title="Chat Us Admin on Telegram"
               >
                 <Send className="w-3 h-3 -rotate-45" />
-                <span className="hidden sm:inline">Telegram</span>
+                <span className="hidden sm:inline">Chat Us Admin</span>
               </a>
               <a
-                href="https://wa.me/?text=Hello%20HyipMasterTracker%20Support%2C%20I%20have%20an%20inquiry"
+                href="https://t.me/+zZFzCZQouFkxMTNk"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded bg-[#25d366] hover:bg-[#20bd5a] text-white cursor-pointer transition-colors shadow-xs"
-                title="Contact Support on WhatsApp"
+                className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded bg-[#0284c7] hover:bg-[#0369a1] text-white cursor-pointer transition-colors shadow-xs"
+                title="Join Telegram Group"
               >
-                <MessageCircle className="w-3 h-3" />
-                <span className="hidden sm:inline">WhatsApp</span>
+                <Users className="w-3 h-3" />
+                <span className="hidden sm:inline">Join Telegram Group</span>
               </a>
             </div>
 
@@ -414,13 +415,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, navigate }) => {
           </div>
         </div>
 
-        {/* 3. DIRECT TELEGRAM & WHATSAPP SUPPORT CHANNELS & SHARE ROW (Hidden on mobile to save vertical screen space) */}
+        {/* 3. DIRECT TELEGRAM CHANNELS & SHARE ROW (Hidden on mobile to save vertical screen space) */}
         <div className="hidden sm:flex flex-wrap items-center justify-between py-2 border-t border-[#f1f5f9] gap-3 text-xs">
           {/* Direct Contact Notice */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[#1e293b] font-bold text-[11px] flex items-center gap-1.5">
-              <MessageCircle className="w-3.5 h-3.5 text-[#25d366]" />
-              <span>Direct Admin & Support Contact:</span>
+              <Send className="w-3.5 h-3.5 text-[#0088cc] -rotate-45" />
+              <span>Official Telegram Channels:</span>
             </span>
 
             <div className="flex items-center gap-2">
@@ -428,22 +429,22 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, navigate }) => {
                 href="https://t.me/hyipmastertracker"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 text-[#0088cc] border border-[#0088cc]/30 text-[11px] font-bold transition-colors"
-                title="Chat with Admin on Telegram"
+                className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0088cc]/10 hover:bg-[#0088cc]/20 text-[#0088cc] border border-[#0088cc]/30 text-[11px] font-bold transition-colors"
+                title="Chat Us Admin on Telegram"
               >
                 <Send className="w-2.5 h-2.5 -rotate-45" />
-                <span>Telegram: @hyipmastertracker</span>
+                <span>Chat Us Admin (@hyipmastertracker)</span>
               </a>
 
               <a
-                href="https://wa.me/?text=Hello%20HyipMasterTracker%20Support%2C%20I%20would%20like%20to%20inquire%20about%20your%20services"
+                href="https://t.me/+zZFzCZQouFkxMTNk"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#25d366]/10 hover:bg-[#25d366]/20 text-[#16a34a] border border-[#25d366]/30 text-[11px] font-bold transition-colors"
-                title="Chat with Admin on WhatsApp"
+                className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 border border-sky-500/30 text-[11px] font-bold transition-colors"
+                title="Join Telegram Group"
               >
-                <MessageCircle className="w-2.5 h-2.5" />
-                <span>WhatsApp: Direct Chat</span>
+                <Users className="w-2.5 h-2.5" />
+                <span>Join Telegram Group</span>
               </a>
             </div>
           </div>
@@ -487,13 +488,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, navigate }) => {
               m
             </a>
             <a
-              href="https://whatsapp.com"
+              href="https://t.me/share/url?url=https://hyipmastertracker.netlify.app&text=HyipMasterTracker"
               target="_blank"
               rel="noreferrer"
-              className="w-5 h-5 rounded-full bg-[#25d366] text-white flex items-center justify-center text-[10px] font-bold hover:opacity-90"
-              title="Share on WhatsApp"
+              className="w-5 h-5 rounded-full bg-[#0088cc] text-white flex items-center justify-center text-[10px] font-bold hover:opacity-90"
+              title="Share on Telegram"
             >
-              w
+              tg
             </a>
             <a
               href="https://pinterest.com"

@@ -24,6 +24,7 @@ import {
   FileCheck2,
   Globe,
   AlertOctagon,
+  Users,
 } from 'lucide-react';
 import { IProject, ICryptoRate, IDepositFlowItem } from '../types.ts';
 import { api } from '../services/api.ts';
@@ -59,9 +60,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
   });
   const [loading, setLoading] = useState(true);
 
-  const telegramHandle = 'hyipmastertracker';
-  const telegramLink = `https://t.me/${telegramHandle}`;
-  const whatsappLink = `https://wa.me/?text=Hello%20HyipMasterTracker%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20monitoring%20and%20listing%20services`;
+  const telegramAdminHandle = 'hyipmastertracker';
+  const telegramAdminLink = `https://t.me/${telegramAdminHandle}`;
+  const telegramGroupLink = 'https://t.me/+zZFzCZQouFkxMTNk';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -186,23 +187,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
             </button>
 
             <a
-              href={telegramLink}
+              href={telegramAdminLink}
               target="_blank"
               rel="noreferrer"
               className="px-5 py-3.5 rounded-xl bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold text-sm flex items-center gap-2 transition-all shadow-lg shadow-[#0088cc]/20 hover:scale-[1.02] cursor-pointer"
             >
               <Send className="w-4 h-4 -rotate-45" />
-              <span>Join Telegram Alerts</span>
+              <span>Chat Us Admin</span>
             </a>
 
             <a
-              href={whatsappLink}
+              href={telegramGroupLink}
               target="_blank"
               rel="noreferrer"
-              className="px-5 py-3.5 rounded-xl bg-[#25d366] hover:bg-[#20bd5a] text-white font-bold text-sm flex items-center gap-2 transition-all shadow-lg shadow-[#25d366]/20 hover:scale-[1.02] cursor-pointer"
+              className="px-5 py-3.5 rounded-xl bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-sm flex items-center gap-2 transition-all shadow-lg shadow-sky-600/20 hover:scale-[1.02] cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Direct WhatsApp Desk</span>
+              <Users className="w-4 h-4" />
+              <span>Join Telegram Group</span>
             </a>
           </div>
 
@@ -455,7 +456,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
                   </h3>
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  No robot delays or automated black holes. Contact our head admin desk directly on Telegram and WhatsApp for instant project status updates, banner ads, and dispute resolution.
+                  No robot delays or automated black holes. Chat with our head admin directly on Telegram or join our official Telegram community group for instant project status updates, banner ads, and dispute resolution.
                 </p>
               </div>
             </div>
@@ -465,17 +466,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <a
-                    href={`https://t.me/${telegramHandle}`}
+                    href={telegramAdminLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-amber-400 transition-colors font-semibold"
                   >
-                    Telegram: @{telegramHandle}
+                    Telegram Admin: @{telegramAdminHandle}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>Verified editorial review & insurance escrow</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                  <a
+                    href={telegramGroupLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-sky-300 transition-colors font-semibold"
+                  >
+                    Telegram Group: Official Community & Alerts
+                  </a>
                 </li>
               </ul>
             </div>
@@ -640,25 +648,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
         )}
       </section>
 
-      {/* 5. DIRECT CONTACT DESK (TELEGRAM & WHATSAPP) */}
+      {/* 5. DIRECT TELEGRAM CONTACT & COMMUNITY (ADMIN & GROUP) */}
       <section className="bg-gradient-to-br from-slate-900 to-[#111827] border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-400 text-xs font-semibold">
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>Direct Human Access Only</span>
+            <Send className="w-3.5 h-3.5 text-[#0088cc] -rotate-45" />
+            <span>Official Telegram Channels</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            Connect With Our Editorial & Admin Team
+            Connect With Our Team & Investor Community
           </h2>
           <p className="text-xs sm:text-sm text-slate-400">
-            Need to list a program, book premium homepage banners, report a delayed payout, or dispute a status? Chat with our team directly.
+            Need to list a program, book premium homepage banners, report a delayed payout, or chat with fellow investors? Join our channels.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto pt-2">
-          {/* Telegram Action Card */}
+          {/* Telegram Admin Action Card */}
           <a
-            href={telegramLink}
+            href={telegramAdminLink}
             target="_blank"
             rel="noreferrer"
             className="group p-5 rounded-2xl bg-slate-900/90 border border-[#0088cc]/30 hover:border-[#0088cc] hover:bg-[#0088cc]/5 transition-all flex items-center justify-between gap-4 shadow-lg"
@@ -668,35 +676,35 @@ export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
                 <Send className="w-6 h-6 -rotate-45" />
               </div>
               <div>
-                <span className="text-sm font-bold text-white block">Telegram Channel</span>
-                <span className="text-xs text-[#0088cc] font-mono block">@{telegramHandle}</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Instant live response</span>
+                <span className="text-sm font-bold text-white block">Chat Us Admin</span>
+                <span className="text-xs text-[#0088cc] font-mono block">@{telegramAdminHandle}</span>
+                <span className="text-[10px] text-slate-400 block mt-0.5">Direct 1-on-1 support & listings</span>
               </div>
             </div>
             <span className="px-3 py-1.5 rounded-lg bg-[#0088cc] text-white text-xs font-bold group-hover:bg-[#0077b5] shrink-0">
-              Open Chat →
+              Chat Us Admin →
             </span>
           </a>
 
-          {/* WhatsApp Action Card */}
+          {/* Telegram Group Action Card */}
           <a
-            href={whatsappLink}
+            href={telegramGroupLink}
             target="_blank"
             rel="noreferrer"
-            className="group p-5 rounded-2xl bg-slate-900/90 border border-[#25d366]/30 hover:border-[#25d366] hover:bg-[#25d366]/5 transition-all flex items-center justify-between gap-4 shadow-lg"
+            className="group p-5 rounded-2xl bg-slate-900/90 border border-sky-500/30 hover:border-sky-500 hover:bg-sky-500/5 transition-all flex items-center justify-between gap-4 shadow-lg"
           >
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-[#25d366] text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <MessageCircle className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-[#0284c7] text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                <Users className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-sm font-bold text-white block">WhatsApp Support</span>
-                <span className="text-xs text-[#25d366] font-mono block">Direct Admin Line</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">24/7 fast messaging</span>
+                <span className="text-sm font-bold text-white block">Join Telegram Group</span>
+                <span className="text-xs text-sky-400 font-mono block">Official Community</span>
+                <span className="text-[10px] text-slate-400 block mt-0.5">Live discussions & alerts</span>
               </div>
             </div>
-            <span className="px-3 py-1.5 rounded-lg bg-[#25d366] text-white text-xs font-bold group-hover:bg-[#1ebd5a] shrink-0">
-              Chat on WA →
+            <span className="px-3 py-1.5 rounded-lg bg-[#0284c7] text-white text-xs font-bold group-hover:bg-[#0369a1] shrink-0">
+              Join Group →
             </span>
           </a>
         </div>

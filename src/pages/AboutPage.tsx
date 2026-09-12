@@ -17,6 +17,7 @@ import {
   Search,
   Activity,
   Award,
+  Users,
 } from 'lucide-react';
 import goofyInsuranceVault from '../assets/images/goofy_insurance_vault_1786739654102.jpg';
 import goofyHumanSupport from '../assets/images/goofy_human_support_1786739642560.jpg';
@@ -140,21 +141,21 @@ export const AboutPage: React.FC<{ navigate: (path: string) => void }> = ({ navi
 
 export const ContactPage: React.FC<{ navigate: (path: string) => void }> = ({ navigate }) => {
   const telegramAdmin = 'hyipmastertracker';
-  const telegramLink = `https://t.me/${telegramAdmin}`;
-  const whatsappLink = `https://wa.me/?text=Hello%20HyipMasterTracker%20Support%2C%20I%20have%20an%20inquiry%20regarding%20a%20project%20or%20advertising`;
+  const telegramAdminLink = `https://t.me/${telegramAdmin}`;
+  const telegramGroupLink = 'https://t.me/+zZFzCZQouFkxMTNk';
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       <div className="space-y-2 text-center max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800 text-blue-400 text-xs font-semibold">
-          <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Direct Institutional Support Desk</span>
+          <Send className="w-3.5 h-3.5 text-[#0088cc] -rotate-45" />
+          <span>Official Telegram Channels</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center justify-center gap-2">
           <span>Contact HyipMasterTracker Team</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400">
-          No automated robot replies or ticket delays. Contact our administrators and editorial desk directly via Telegram or WhatsApp.
+          No automated robot replies or ticket delays. Chat directly with our administrators on Telegram or join our official community group.
         </p>
       </div>
 
@@ -187,14 +188,14 @@ export const ContactPage: React.FC<{ navigate: (path: string) => void }> = ({ na
               Direct Dispute & Verification Desk
             </h2>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Whether you need to report a selective payment, verify a new program, or book high-visibility listings, our editors answer swiftly on Telegram & WhatsApp.
+              Whether you need to report a selective payment, verify a new program, or book high-visibility listings, our editors answer swiftly via our Telegram admin chat & community group.
             </p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Telegram Direct Card */}
+        {/* Telegram Direct Admin Card */}
         <div className="bg-[#111827] border border-[#0088cc]/40 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col justify-between space-y-6 hover:border-[#0088cc] transition-colors">
           <div className="space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-[#0088cc] text-white flex items-center justify-center shadow-lg shadow-[#0088cc]/20">
@@ -204,9 +205,9 @@ export const ContactPage: React.FC<{ navigate: (path: string) => void }> = ({ na
               <span className="text-[11px] font-bold text-[#0088cc] uppercase tracking-wider block">
                 Primary Instant Channel
               </span>
-              <h3 className="text-xl font-black text-white mt-1">Telegram Support</h3>
+              <h3 className="text-xl font-black text-white mt-1">Chat Us Admin</h3>
               <p className="text-xs text-slate-400 mt-2 leading-relaxed">
-                Connect with our head moderator and listing admin on Telegram for instant project status updates, banner ads, and scam disputes.
+                Connect directly with our head moderator and listing admin on Telegram for instant project status updates, banner ads, and scam disputes.
               </p>
             </div>
 
@@ -217,50 +218,50 @@ export const ContactPage: React.FC<{ navigate: (path: string) => void }> = ({ na
           </div>
 
           <a
-            href={telegramLink}
+            href={telegramAdminLink}
             target="_blank"
             rel="noreferrer"
             className="w-full py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
           >
             <Send className="w-4 h-4 -rotate-45" />
-            <span>Open Telegram Chat</span>
+            <span>Chat Us Admin</span>
             <ExternalLink className="w-3.5 h-3.5 opacity-70" />
           </a>
         </div>
 
-        {/* WhatsApp Direct Card */}
-        <div className="bg-[#111827] border border-[#25d366]/40 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col justify-between space-y-6 hover:border-[#25d366] transition-colors">
+        {/* Telegram Group Card */}
+        <div className="bg-[#111827] border border-sky-500/40 rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col justify-between space-y-6 hover:border-sky-500 transition-colors">
           <div className="space-y-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#25d366] text-white flex items-center justify-center shadow-lg shadow-[#25d366]/20">
-              <MessageCircle className="w-7 h-7" />
+            <div className="w-14 h-14 rounded-2xl bg-[#0284c7] text-white flex items-center justify-center shadow-lg shadow-sky-600/20">
+              <Users className="w-7 h-7" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-[#25d366] uppercase tracking-wider block">
-                Direct Messaging Support
+              <span className="text-[11px] font-bold text-sky-400 uppercase tracking-wider block">
+                Official Community
               </span>
-              <h3 className="text-xl font-black text-white mt-1">WhatsApp Chat</h3>
+              <h3 className="text-xl font-black text-white mt-1">Join Telegram Group</h3>
               <p className="text-xs text-slate-400 mt-2 leading-relaxed">
-                Send messages directly to our editorial and compliance team on WhatsApp for immediate feedback on listings and payout verification.
+                Join fellow investors in our public Telegram community group to discuss active programs, share withdrawal screenshots, and get instant alerts.
               </p>
             </div>
 
             <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-              <div className="text-[11px] text-slate-400">Response Speed:</div>
-              <div className="text-sm font-bold text-emerald-400 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" />
-                <span>Typically under 15 minutes</span>
+              <div className="text-[11px] text-slate-400">Community Access:</div>
+              <div className="text-sm font-bold text-sky-400 flex items-center gap-1.5">
+                <Users className="w-3.5 h-3.5" />
+                <span>Open Public Group</span>
               </div>
             </div>
           </div>
 
           <a
-            href={whatsappLink}
+            href={telegramGroupLink}
             target="_blank"
             rel="noreferrer"
-            className="w-full py-3 bg-[#25d366] hover:bg-[#20bd5a] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
+            className="w-full py-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>Open WhatsApp Chat</span>
+            <Users className="w-4 h-4" />
+            <span>Join Telegram Group</span>
             <ExternalLink className="w-3.5 h-3.5 opacity-70" />
           </a>
         </div>

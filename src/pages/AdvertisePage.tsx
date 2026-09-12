@@ -14,6 +14,7 @@ import {
   MessageCircle,
   Copy,
   Check,
+  Users,
 } from 'lucide-react';
 import { api } from '../services/api.ts';
 import { useAuth } from '../context/AuthContext.tsx';
@@ -23,11 +24,8 @@ export const AdvertisePage: React.FC<{ navigate: (path: string) => void }> = ({ 
   const [copied, setCopied] = useState(false);
 
   const telegramAdmin = 'hyipmastertracker';
-  const telegramLink = `https://t.me/${telegramAdmin}`;
-  const whatsappNumber = '+1234567890';
-  const whatsappLink = `https://wa.me/?text=${encodeURIComponent(
-    `Hello HyipMasterTracker Admin, I would like to book the advertising placement: ${selectedSlot}. Please provide payment address and banner specs.`
-  )}`;
+  const telegramAdminLink = `https://t.me/${telegramAdmin}`;
+  const telegramGroupLink = 'https://t.me/+zZFzCZQouFkxMTNk';
 
   const adSlots = [
     {
@@ -83,7 +81,7 @@ export const AdvertisePage: React.FC<{ navigate: (path: string) => void }> = ({ 
           Advertise on HyipMasterTracker
         </h1>
         <p className="text-xs sm:text-sm text-slate-300">
-          No automated queues or delays. Connect directly with our admin team via Telegram and WhatsApp for instant banner deployment and custom invoicing.
+          No automated queues or delays. Connect directly with our admin team via Telegram or join our official Telegram group for instant banner deployment and custom invoicing.
         </p>
       </div>
 
@@ -167,11 +165,11 @@ export const AdvertisePage: React.FC<{ navigate: (path: string) => void }> = ({ 
           </button>
         </div>
 
-        {/* Telegram & WhatsApp Direct Channels */}
+        {/* Telegram Direct Channels */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Telegram Channel Card */}
+          {/* Telegram Admin Channel Card */}
           <a
-            href={telegramLink}
+            href={telegramAdminLink}
             target="_blank"
             rel="noreferrer"
             className="group p-5 rounded-xl bg-slate-900 border border-[#0088cc]/30 hover:border-[#0088cc] hover:bg-[#0088cc]/5 transition-all flex items-center justify-between gap-4"
@@ -181,35 +179,35 @@ export const AdvertisePage: React.FC<{ navigate: (path: string) => void }> = ({ 
                 <Send className="w-6 h-6 -rotate-45" />
               </div>
               <div className="space-y-0.5">
-                <span className="font-bold text-white text-sm block">Contact via Telegram</span>
+                <span className="font-bold text-white text-sm block">Chat Us Admin</span>
                 <span className="text-xs text-[#0088cc] font-mono block">@{telegramAdmin}</span>
-                <span className="text-[11px] text-slate-400 block">Instant reply within 15 minutes</span>
+                <span className="text-[11px] text-slate-400 block">Instant reply for booking banners & invoices</span>
               </div>
             </div>
             <span className="px-3 py-1.5 rounded-lg bg-[#0088cc] text-white text-xs font-bold group-hover:bg-[#0077b5] shrink-0">
-              Open Chat →
+              Chat Us Admin →
             </span>
           </a>
 
-          {/* WhatsApp Channel Card */}
+          {/* Telegram Group Channel Card */}
           <a
-            href={whatsappLink}
+            href={telegramGroupLink}
             target="_blank"
             rel="noreferrer"
-            className="group p-5 rounded-xl bg-slate-900 border border-[#25d366]/30 hover:border-[#25d366] hover:bg-[#25d366]/5 transition-all flex items-center justify-between gap-4"
+            className="group p-5 rounded-xl bg-slate-900 border border-sky-500/30 hover:border-sky-500 hover:bg-sky-500/5 transition-all flex items-center justify-between gap-4"
           >
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-full bg-[#25d366] text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <MessageCircle className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-full bg-[#0284c7] text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                <Users className="w-6 h-6" />
               </div>
               <div className="space-y-0.5">
-                <span className="font-bold text-white text-sm block">Contact via WhatsApp</span>
-                <span className="text-xs text-[#25d366] font-mono block">Direct Admin Chat</span>
-                <span className="text-[11px] text-slate-400 block">24/7 Fast message response</span>
+                <span className="font-bold text-white text-sm block">Join Telegram Group</span>
+                <span className="text-xs text-sky-400 font-mono block">Official Community</span>
+                <span className="text-[11px] text-slate-400 block">Community updates & support</span>
               </div>
             </div>
-            <span className="px-3 py-1.5 rounded-lg bg-[#25d366] text-white text-xs font-bold group-hover:bg-[#1ebd5a] shrink-0">
-              Chat on WA →
+            <span className="px-3 py-1.5 rounded-lg bg-[#0284c7] text-white text-xs font-bold group-hover:bg-[#0369a1] shrink-0">
+              Join Group →
             </span>
           </a>
         </div>
@@ -218,7 +216,7 @@ export const AdvertisePage: React.FC<{ navigate: (path: string) => void }> = ({ 
         <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 space-y-1">
           <p className="font-bold text-slate-200">How Direct Advertising Works:</p>
           <p>
-            1. Tap on either <strong>Telegram</strong> or <strong>WhatsApp</strong> above.<br />
+            1. Tap on either <strong>Chat Us Admin</strong> or <strong>Join Telegram Group</strong> above.<br />
             2. Send your banner link, target URL, and preferred duration.<br />
             3. Our administrator verifies your banner within minutes and provides payment address (USDT / BTC / ETH / ePayCore).
           </p>

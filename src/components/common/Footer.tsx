@@ -43,20 +43,20 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0088cc] hover:bg-[#0077b5] text-white text-[11px] font-bold transition-colors"
-                title="Telegram Support"
+                title="Chat Us Admin on Telegram"
               >
                 <span className="goofy-emoji-spin text-xs">💬</span>
-                <span>Telegram Support</span>
+                <span>Chat Us Admin</span>
               </a>
               <a
-                href="https://wa.me/?text=Hello%20HyipMasterTracker%20Support"
+                href="https://t.me/+zZFzCZQouFkxMTNk"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#25d366] hover:bg-[#20bd5a] text-white text-[11px] font-bold transition-colors"
-                title="WhatsApp Support"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0284c7] hover:bg-[#0369a1] text-white text-[11px] font-bold transition-colors"
+                title="Join Telegram Group"
               >
-                <span className="goofy-emoji-bounce text-xs">📱</span>
-                <span>WhatsApp Direct</span>
+                <span className="goofy-emoji-bounce text-xs">👥</span>
+                <span>Join Telegram Group</span>
               </a>
             </div>
           </div>

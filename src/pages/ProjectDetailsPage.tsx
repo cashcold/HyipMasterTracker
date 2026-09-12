@@ -958,7 +958,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                 </p>
                 <p className="text-[11px] font-bold text-[#0284c7] flex items-center gap-1">
                   <span className="goofy-emoji-1 inline-block text-[11px]">⚡</span>
-                  <span>Report disputes to our Telegram (@hyipmastertracker) or WhatsApp support!</span>
+                  <span>Report disputes to our Telegram Admin (<a href="https://t.me/hyipmastertracker" target="_blank" rel="noreferrer" className="underline hover:text-[#0369a1]">@hyipmastertracker</a>) or <a href="https://t.me/+zZFzCZQouFkxMTNk" target="_blank" rel="noreferrer" className="underline hover:text-[#0369a1]">Telegram Community Group</a>!</span>
                 </p>
               </div>
 
