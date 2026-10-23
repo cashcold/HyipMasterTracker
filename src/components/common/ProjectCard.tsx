@@ -201,6 +201,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <span className="goofy-emoji-spin text-[10px]">✨</span>
           </p>
 
+          {project.bonus && (
+            <div className="pt-0.5">
+              <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white font-extrabold text-[9px] uppercase tracking-wider inline-flex items-center gap-1 shadow-xs animate-pulse">
+                <span>🎁 BONUS:</span>
+                <span>{project.bonus}</span>
+              </span>
+            </div>
+          )}
+
           <div className="flex items-center gap-2 pt-0.5">
             <button
               onClick={handleVisit}
@@ -227,7 +236,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         <p className="text-[11px] text-[#475569] font-medium flex items-center gap-1">
           <span>Invested:</span>
-          <span className="font-bold text-[#1e293b] font-mono">${(project.totalDeposits || 45483).toLocaleString()}</span>
+          <span className="font-bold text-[#1e293b] font-mono">
+            {project.currencySymbol
+              ? `${project.currencySymbol}${(project.totalDeposits || 45483).toLocaleString()}`
+              : `$${(project.totalDeposits || 45483).toLocaleString()}`}
+          </span>
           <span className="goofy-emoji-spin text-[10px]">💸</span>
         </p>
         <p className="text-[10px] text-[#64748b] flex items-center gap-1">
@@ -257,11 +270,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         <p className="text-[#475569] flex items-center gap-1 flex-wrap">
           <span className="font-medium">Min deposit:</span>{' '}
-          <strong className="text-slate-900 font-mono">${project.minInvestment || 10}</strong>
+          <strong className="text-slate-900 font-mono">
+            {project.currencySymbol ? `${project.currencySymbol}${project.minInvestment || 10}` : `$${project.minInvestment || 10}`}
+          </strong>
           <span className="goofy-emoji-bounce text-[10px] inline-block">💵</span>
           <span className="text-slate-300 font-bold">|</span>
           <span className="font-medium">Max deposit:</span>{' '}
-          <strong className="text-slate-900 font-mono">${project.maxInvestment ? project.maxInvestment.toLocaleString() : '15,000'}</strong>
+          <strong className="text-slate-900 font-mono">
+            {project.currencySymbol
+              ? `${project.currencySymbol}${project.maxInvestment ? project.maxInvestment.toLocaleString() : '15,000'}`
+              : `$${project.maxInvestment ? project.maxInvestment.toLocaleString() : '15,000'}`}
+          </strong>
           <span className="goofy-emoji-spin text-[10px] inline-block">🪙</span>
         </p>
 
@@ -292,7 +311,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               let bg = '#64748b';
               let title = method;
 
-              if (m.includes('btc') || m.includes('bitcoin')) {
+              if (m.includes('momo') || m.includes('mobile money') || m.includes('mtn') || m.includes('airteltigo')) {
+                icon = '📱 MoMo';
+                bg = '#d97706';
+                title = method.includes('mtn') ? 'MTN Mobile Money' : method.includes('airtel') ? 'AirtelTigo MoMo' : 'Mobile Money';
+              } else if (m.includes('btc') || m.includes('bitcoin')) {
                 icon = '₿';
                 bg = '#f7931a';
               } else if (m.includes('trc20') || (m.includes('usdt') && !m.includes('erc20') && !m.includes('bep20'))) {

@@ -118,6 +118,15 @@ export interface IProject {
   totalDeposits?: number;
   logoUrl?: string;
   dailyProfit?: string;
+  bonus?: string;
+  currencySymbol?: string;
+  apkDownloadUrl?: string;
+  androidAppInfo?: {
+    packageName: string;
+    size: string;
+    sha256: string;
+    version: string;
+  };
   createdAt: string;
   updatedAt: string;
 }

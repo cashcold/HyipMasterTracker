@@ -18,6 +18,11 @@ import {
   AlertTriangle,
   Send,
   User as UserIcon,
+  Smartphone,
+  Download,
+  CheckCircle2,
+  Zap,
+  Coins,
 } from 'lucide-react';
 import { api } from '../services/api.ts';
 import { useAuth } from '../context/AuthContext.tsx';
@@ -413,7 +418,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                 </div>
 
                 {/* Our Investment Capsule with Goofy Animation Accent */}
-                <div className="pt-0.5 pb-0.5">
+                <div className="pt-0.5 pb-0.5 flex flex-wrap items-center gap-2">
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 border border-emerald-300 text-xs font-bold text-[#1e293b] shadow-2xs">
                     <span className="text-[#dc2626] font-black text-base goofy-emoji-bounce inline-block">⇒</span>
                     <span className="text-slate-700 font-semibold">Our Investment:</span>
@@ -422,7 +427,40 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                       <span className="goofy-emoji-bounce inline-block text-[11px]">💎</span>
                     </span>
                   </div>
+
+                  {project.bonus && (
+                    <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white text-xs font-black shadow-xs animate-pulse">
+                      <span className="goofy-emoji-bounce inline-block text-[11px]">🔥</span>
+                      <span>WELCOME BONUS:</span>
+                      <span className="underline">{project.bonus}</span>
+                    </div>
+                  )}
                 </div>
+
+                {project.bonus && (
+                  <div className="p-2.5 rounded-lg bg-gradient-to-r from-amber-50 via-rose-50 to-pink-50 border border-amber-300 text-slate-800 shadow-xs flex items-center justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl goofy-emoji-bounce">🎁</span>
+                      <div>
+                        <div className="font-extrabold text-xs text-rose-700 flex items-center gap-1.5">
+                          <span>₵20 Instant Welcome Gift On Registration</span>
+                          <span className="px-1.5 py-0.2 rounded bg-rose-600 text-white text-[9px] font-black">AUTOMATIC</span>
+                        </div>
+                        <p className="text-[11px] text-slate-600 mt-0.5">
+                          Create your free account today and get <strong>₵20.00</strong> credited directly to your wallet! Min Deposit: <strong>₵100</strong> • Min Withdrawal: <strong>₵20 Daily</strong>
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href={targetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-md bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-black text-xs shadow-xs transition-all hover:scale-105 shrink-0"
+                    >
+                      Claim ₵20 Bonus →
+                    </a>
+                  </div>
+                )}
 
                 <div className="pt-1 flex flex-wrap items-center gap-2">
                   <StatusBadge status={project.status} size="md" />
@@ -465,7 +503,7 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                       <span>
                         {primaryPlan
                           ? `${primaryPlan.advertisedReturn} For ${primaryPlan.duration} (Principal included) -- Total return: 180%`
-                          : '2.0% Daily Forever For Lifetime (Principal included) -- Total return: 180%'}
+                          : 'Crown 1 – Crown 7 (180 Days Daily Payouts)'}
                       </span>
                       <span className="goofy-emoji-pop text-xs inline-block">🎯</span>
                     </span>
@@ -475,13 +513,19 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                     <span className="inline-flex items-center gap-1 bg-amber-50/60 px-1.5 py-0.5 rounded border border-amber-200/60">
                       <span className="goofy-emoji-bounce text-[11px] inline-block">💵</span>
                       <span className="text-[#dc2626] font-bold">Min deposit:</span>
-                      <strong className="text-slate-900 font-mono">${project.minInvestment || 10}</strong>
+                      <strong className="text-slate-900 font-mono">
+                        {project.currencySymbol ? `${project.currencySymbol}${project.minInvestment || 10}` : `$${project.minInvestment || 10}`}
+                      </strong>
                     </span>
                     <span className="text-slate-300 font-bold">|</span>
                     <span className="inline-flex items-center gap-1 bg-emerald-50/60 px-1.5 py-0.5 rounded border border-emerald-200/60">
                       <span className="goofy-emoji-spin text-[11px] inline-block">🪙</span>
                       <span className="text-[#dc2626] font-bold">Max deposit:</span>
-                      <strong className="text-slate-900 font-mono">${project.maxInvestment ? project.maxInvestment.toLocaleString() : '15,000'}</strong>
+                      <strong className="text-slate-900 font-mono">
+                        {project.currencySymbol
+                          ? `${project.currencySymbol}${project.maxInvestment ? project.maxInvestment.toLocaleString() : '15,000'}`
+                          : `$${project.maxInvestment ? project.maxInvestment.toLocaleString() : '15,000'}`}
+                      </strong>
                       <span className="goofy-emoji-pop text-[10px] inline-block">💎</span>
                     </span>
                   </p>
@@ -497,8 +541,12 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                     <span className="inline-flex items-center gap-1 bg-sky-50/80 px-1.5 py-0.5 rounded border border-sky-200/80">
                       <span className="goofy-emoji-2 text-[11px] inline-block">⚡</span>
                       <span className="font-bold text-[#334155]">Withdrawal:</span>
-                      <span className="px-1.5 py-0.2 rounded bg-[#0284c7] text-white font-black text-[10px] tracking-wide inline-flex items-center gap-0.5 shadow-2xs">
-                        <span>Manual</span>
+                      <span className={`px-1.5 py-0.2 rounded text-white font-black text-[10px] tracking-wide inline-flex items-center gap-0.5 shadow-2xs ${
+                        project.withdrawalMethods && project.withdrawalMethods.toLowerCase().includes('instant')
+                          ? 'bg-emerald-600'
+                          : 'bg-[#0284c7]'
+                      }`}>
+                        <span>{project.withdrawalMethods && project.withdrawalMethods.toLowerCase().includes('instant') ? 'Instant (< 5m)' : 'Manual'}</span>
                       </span>
                       <span className="goofy-emoji-bounce text-[10px] inline-block">🔐</span>
                     </span>
@@ -533,18 +581,23 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
 
                 <div className="space-y-1">
                   <span className="text-[10px] text-[#64748b] block">Payment systems:</span>
-                  <div className="flex items-center justify-end gap-1">
+                  <div className="flex items-center justify-end gap-1 flex-wrap max-w-[190px]">
+                    {project.paymentMethods && project.paymentMethods.some((m) => m.toLowerCase().includes('momo') || m.toLowerCase().includes('mobile money')) && (
+                      <span className="px-1.5 py-0.5 rounded-xs bg-[#d97706] text-white text-[9px] font-black shadow-xs" title="Mobile Money (MTN & AirtelTigo)">
+                        📱 MoMo
+                      </span>
+                    )}
                     <span className="w-4 h-4 rounded-full bg-[#f7931a] text-white flex items-center justify-center text-[10px] font-black shadow-xs hover:scale-110 transition-transform" title="Bitcoin">
                       ₿
                     </span>
                     <span className="w-4 h-4 rounded-full bg-[#26a17b] text-white flex items-center justify-center text-[10px] font-black shadow-xs hover:scale-110 transition-transform" title="Tether USDT">
                       ₮
                     </span>
-                    <span className="w-4 h-4 rounded-full bg-[#345d9d] text-white flex items-center justify-center text-[9px] font-black shadow-xs hover:scale-110 transition-transform" title="Litecoin">
-                      Ł
-                    </span>
                     <span className="w-4 h-4 rounded-full bg-[#627eea] text-white flex items-center justify-center text-[9px] font-black shadow-xs hover:scale-110 transition-transform" title="Ethereum">
                       Ξ
+                    </span>
+                    <span className="w-4 h-4 rounded-full bg-[#f3ba2f] text-white flex items-center justify-center text-[8px] font-black shadow-xs hover:scale-110 transition-transform" title="BNB">
+                      BNB
                     </span>
                   </div>
                 </div>
@@ -573,7 +626,14 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                   <span className="w-4 h-4 rounded-full overflow-hidden border border-amber-400 inline-block shrink-0">
                     <img src={goofyVaultGuardian} alt="Vault" className="w-full h-full object-cover" />
                   </span>
-                  <span>Total deposited: <strong className="text-[#1e293b] font-mono">${(project.totalDeposits || 45483).toLocaleString()}</strong></span>
+                  <span>
+                    Total deposited:{' '}
+                    <strong className="text-[#1e293b] font-mono">
+                      {project.currencySymbol
+                        ? `${project.currencySymbol}${(project.totalDeposits || 45483).toLocaleString()}`
+                        : `$${(project.totalDeposits || 45483).toLocaleString()}`}
+                    </strong>
+                  </span>
                 </span>
                 <span className="text-[#0284c7] flex items-center gap-1">
                   <span>RCB offers:</span>
@@ -648,6 +708,198 @@ export const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ slug, na
                     <p>No critical security incidents or negative status changes reported. Project operates with normal payout cycles.</p>
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* 2.6. VERIFIED INVESTMENT PLANS & DAILY YIELD SCHEDULE */}
+          {project.plans && project.plans.length > 0 && (
+            <div className="bg-white border border-[#cbd5e1] rounded-sm shadow-xs overflow-hidden">
+              <div className="bg-gradient-to-r from-slate-900 to-[#1e293b] text-white px-4 py-2 font-bold text-xs flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="goofy-emoji-bounce text-sm">👑</span>
+                  <span>Verified Investment Plans & Daily Yield Schedule</span>
+                </div>
+                <span className="text-[10px] text-amber-300 font-mono flex items-center gap-1 font-bold">
+                  <span>{project.plans.length} Active Plans</span>
+                  <span className="goofy-emoji-spin text-[10px]">✨</span>
+                </span>
+              </div>
+
+              <div className="p-4 space-y-3">
+                <div className="flex items-center justify-between gap-2 flex-wrap text-xs text-slate-600">
+                  <p>
+                    All plans feature automated 24-hour yield calculations with guaranteed daily payouts withdrawable via Mobile Money or Crypto.
+                  </p>
+                  {project.bonus && (
+                    <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold border border-rose-200 flex items-center gap-1">
+                      <span>🎁 Free Gift:</span>
+                      <strong>{project.bonus}</strong>
+                    </span>
+                  )}
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border border-slate-200 rounded">
+                    <thead className="bg-slate-100/90 text-slate-700 font-bold border-b border-slate-200 text-[11px]">
+                      <tr>
+                        <th className="p-2.5">Tier & Plan Name</th>
+                        <th className="p-2.5">Capital Required</th>
+                        <th className="p-2.5">Daily Income</th>
+                        <th className="p-2.5">Duration</th>
+                        <th className="p-2.5">Total Return</th>
+                        <th className="p-2.5 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 text-[#1e293b]">
+                      {project.plans.map((pl, idx) => (
+                        <tr key={pl.id || idx} className="hover:bg-amber-50/40 transition-colors">
+                          <td className="p-2.5 font-bold flex items-center gap-1.5">
+                            <span className="text-amber-500 font-mono text-sm">👑</span>
+                            <div>
+                              <span className="block font-black text-slate-900">{pl.name}</span>
+                              <span className="block text-[10px] text-slate-500 font-normal">{pl.type || 'Daily automated payout'}</span>
+                            </div>
+                          </td>
+                          <td className="p-2.5 font-mono font-bold text-slate-800">
+                            {project.currencySymbol ? `${project.currencySymbol}${pl.minInvestment}` : `$${pl.minInvestment}`}
+                            {pl.maxInvestment && pl.maxInvestment > pl.minInvestment && (
+                              <span className="text-slate-400 font-normal text-[10px] block">
+                                up to {project.currencySymbol ? `${project.currencySymbol}${pl.maxInvestment}` : `$${pl.maxInvestment}`}
+                              </span>
+                            )}
+                          </td>
+                          <td className="p-2.5 font-mono font-extrabold text-emerald-600">
+                            +{pl.advertisedReturn}
+                          </td>
+                          <td className="p-2.5 font-medium text-slate-600">
+                            <span className="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-[10px] font-semibold">
+                              {pl.duration}
+                            </span>
+                          </td>
+                          <td className="p-2.5 font-bold text-sky-700 font-mono">
+                            {pl.type.includes('Total') ? pl.type.split('•')[0].replace('180 Days Daily (', '').trim() : 'Guaranteed Yield'}
+                          </td>
+                          <td className="p-2.5 text-right">
+                            <a
+                              href={targetUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2.5 py-1 rounded bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-[10px] inline-flex items-center gap-1 transition-colors"
+                            >
+                              <span>Activate</span>
+                              <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 2.7. OFFICIAL ANDROID APP DOWNLOAD CARD */}
+          {project.androidAppInfo && (
+            <div className="bg-gradient-to-br from-slate-900 via-[#0f172a] to-slate-900 border border-emerald-500/30 rounded-sm p-4 sm:p-5 text-white shadow-md space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center shrink-0 shadow-inner">
+                    <Smartphone className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold border border-emerald-500/30">
+                        {project.androidAppInfo.version}
+                      </span>
+                      <span className="text-[10px] text-slate-400">Android 7.0+ Compatible</span>
+                    </div>
+                    <h3 className="text-base font-black text-white mt-0.5">
+                      Download Official {project.name} Android App
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Real-time daily video yield payouts, push notifications, and instant Mobile Money withdrawals directly on your phone.
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href={targetUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs inline-flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20 shrink-0"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download APK ({project.androidAppInfo.size})</span>
+                </a>
+              </div>
+
+              {/* Package, SHA-256 Checksum, and 3-step guide */}
+              <div className="pt-3 border-t border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div className="space-y-1.5 p-3 rounded bg-slate-950/70 border border-slate-800">
+                  <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                    <span>Package:</span>
+                    <strong className="text-slate-200">{project.androidAppInfo.packageName}</strong>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                    <span>File Size:</span>
+                    <strong className="text-emerald-400">{project.androidAppInfo.size}</strong>
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono break-all pt-1 border-t border-slate-800">
+                    <span className="block text-slate-500">SHA-256 Checksum:</span>
+                    <code className="text-slate-300 text-[9px]">{project.androidAppInfo.sha256}</code>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5 p-3 rounded bg-slate-950/70 border border-slate-800 text-[11px]">
+                  <span className="font-bold text-amber-400 block">Easy 3-Step Phone Installation:</span>
+                  <ol className="list-decimal list-inside space-y-1 text-slate-300">
+                    <li>Download the official APK file ({project.androidAppInfo.size})</li>
+                    <li>Allow "Install Unknown Apps" in phone settings if prompted</li>
+                    <li>Open {project.name}, claim your <strong>{project.bonus || '₵20 bonus'}</strong>, and activate your plan!</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 2.8. ENERGY POINT VERIFIED LIQUIDITY & CLEAN POWER RESERVE */}
+          {project.slug === 'energy-point' && (
+            <div className="bg-[#f0fdf4] border border-emerald-300 rounded-sm p-4 text-xs space-y-3 shadow-xs">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-emerald-600" />
+                  <span className="font-bold text-slate-900 text-sm">
+                    Verified Clean Energy Grid & Institutional Liquidity Fund
+                  </span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900 font-bold text-[10px]">
+                  Audited Solvency Reserve
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                <div className="p-2 rounded bg-white border border-emerald-200">
+                  <span className="text-[10px] text-slate-500 block">Reserve Capital</span>
+                  <strong className="text-xs font-mono font-black text-emerald-700 block">₵177,119,764 GHS</strong>
+                  <span className="text-[9px] text-slate-400">Audited Liquidity</span>
+                </div>
+                <div className="p-2 rounded bg-white border border-emerald-200">
+                  <span className="text-[10px] text-slate-500 block">Clean Energy Grid</span>
+                  <strong className="text-xs font-mono font-black text-slate-800 block">680,000 kWh</strong>
+                  <span className="text-[9px] text-slate-400">Active Solar & Wind</span>
+                </div>
+                <div className="p-2 rounded bg-white border border-emerald-200">
+                  <span className="text-[10px] text-slate-500 block">Active Members</span>
+                  <strong className="text-xs font-mono font-black text-slate-800 block">111,225+</strong>
+                  <span className="text-[9px] text-slate-400">140+ Countries</span>
+                </div>
+                <div className="p-2 rounded bg-white border border-emerald-200">
+                  <span className="text-[10px] text-slate-500 block">Avg Withdrawal</span>
+                  <strong className="text-xs font-mono font-black text-emerald-600 block">&lt; 5 Minutes</strong>
+                  <span className="text-[9px] text-slate-400">MoMo & Crypto</span>
+                </div>
               </div>
             </div>
           )}

@@ -102,6 +102,16 @@ export interface IProject {
   isApproved: boolean;
   viewsCount: number;
   reviewCount: number;
+  totalDeposits?: number;
+  bonus?: string;
+  currencySymbol?: string;
+  apkDownloadUrl?: string;
+  androidAppInfo?: {
+    packageName: string;
+    size: string;
+    sha256: string;
+    version: string;
+  };
   createdAt: string;
   updatedAt: string;
 }

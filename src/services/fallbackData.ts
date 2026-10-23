@@ -49,8 +49,24 @@ function generateFallbackDepositFlow() {
   const now = Date.now();
   const raw = [
     {
-      id: 'dep-flow-0',
+      id: 'dep-flow-ep',
       minutesAgo: 1,
+      projectName: 'Energy Point',
+      projectSlug: 'energy-point',
+      projectLogo: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&auto=format&fit=crop&q=80',
+      investorName: 'Kofi_Mensah_EP',
+      investorCountry: 'Ghana',
+      investorFlag: '🇬🇭',
+      amountUsd: 1000,
+      cryptoAmount: '₵1,000.00 GHS',
+      paymentMethod: 'MTN Mobile Money',
+      planName: 'Crown 3 Tier (₵100 / Day Payout)',
+      txHash: 'MoMo-EP-99412',
+      status: 'VERIFIED_ON_CHAIN',
+    },
+    {
+      id: 'dep-flow-0',
+      minutesAgo: 3,
       projectName: 'Aura Diamond Holdings',
       projectSlug: 'aura-diamond-holdings',
       projectLogo: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80',
