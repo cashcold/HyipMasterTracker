@@ -5,52 +5,52 @@
       "name": "System Admin",
       "username": "admin",
       "email": "admin@hyipmastertracker.com",
-      "passwordHash": "$2b$10$YlNOkvKjHmfxHcb5um6Sy.rK1xdBntc4XjvHBFldfariXD14Y6FOa",
+      "passwordHash": "$2b$10$v6ojnlgZPhir9wEgtLMkWeyQ0Uk1fTSDkmYXOYoLzK92ppqbODoOm",
       "role": "SUPER_ADMIN",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
       "isVerified": true,
       "isSuspended": false,
-      "createdAt": "2025-12-27T11:14:51.344Z",
-      "updatedAt": "2026-10-22T11:14:51.344Z"
+      "createdAt": "2026-01-01T17:33:23.751Z",
+      "updatedAt": "2026-10-27T17:33:23.751Z"
     },
     {
       "id": "usr-mod-1",
       "name": "Verification Officer",
       "username": "mod_alex",
       "email": "mod@hyipmastertracker.com",
-      "passwordHash": "$2b$10$xwSF7ptESgsJf7RCZ15rh.sv67jHWYDD2kNbTB2o4uT2Py0Jw7mlq",
+      "passwordHash": "$2b$10$VtvIQpMezP6agVXlZMxsa.PZHfIQ9XNnamTeIIaR44LMwREFePOpe",
       "role": "MODERATOR",
       "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
       "isVerified": true,
       "isSuspended": false,
-      "createdAt": "2026-04-06T11:14:51.344Z",
-      "updatedAt": "2026-10-21T11:14:51.344Z"
+      "createdAt": "2026-04-11T17:33:23.751Z",
+      "updatedAt": "2026-10-26T17:33:23.751Z"
     },
     {
       "id": "usr-demo-1",
       "name": "David Vance",
       "username": "dvance_crypto",
       "email": "investor@example.com",
-      "passwordHash": "$2b$10$xwSF7ptESgsJf7RCZ15rh.gYmTh4ztymELD5UwDvIk3BBmUKYqBQq",
+      "passwordHash": "$2b$10$VtvIQpMezP6agVXlZMxsa.sNgthOJjwB32IleXdi5waZWcNWf0y6m",
       "role": "USER",
       "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
       "isVerified": true,
       "isSuspended": false,
-      "createdAt": "2026-06-25T11:14:51.344Z",
-      "updatedAt": "2026-10-18T11:14:51.344Z"
+      "createdAt": "2026-06-30T17:33:23.751Z",
+      "updatedAt": "2026-10-23T17:33:23.751Z"
     },
     {
       "id": "usr-demo-2",
       "name": "Elena Rostova",
       "username": "elena_research",
       "email": "elena@example.com",
-      "passwordHash": "$2b$10$xwSF7ptESgsJf7RCZ15rh.gYmTh4ztymELD5UwDvIk3BBmUKYqBQq",
+      "passwordHash": "$2b$10$VtvIQpMezP6agVXlZMxsa.sNgthOJjwB32IleXdi5waZWcNWf0y6m",
       "role": "USER",
       "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
       "isVerified": true,
       "isSuspended": false,
-      "createdAt": "2026-07-25T11:14:51.344Z",
-      "updatedAt": "2026-10-13T11:14:51.344Z"
+      "createdAt": "2026-07-30T17:33:23.751Z",
+      "updatedAt": "2026-10-18T17:33:23.751Z"
     }
   ],
   "projects": [
@@ -70,7 +70,7 @@
       "riskLevel": "Very High Confidence",
       "rating": 9.3,
       "dateAdded": "2026-10-01T00:00:00.000Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 23,
       "minInvestment": 100,
       "maxInvestment": 12000,
@@ -168,7 +168,7 @@
           "status": "PAYING",
           "rating": 9.3,
           "notes": "Verified automated Mobile Money (MTN/AirtelTigo) and USDT TRC20 payouts under 5 minutes. ₵20 signup bonus credited.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-ep-2",
@@ -178,7 +178,7 @@
           "status": "PAYING",
           "rating": 9.2,
           "notes": "Active 180-day Crown tiers verified with consistent daily yield settlement. Audited capital reserve: ₵177,119,764 GHS.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         },
         {
           "id": "mr-ep-3",
@@ -188,17 +188,17 @@
           "status": "PAYING",
           "rating": 9.4,
           "notes": "Real-time automated payouts verified with 100% solvency and 99.98% network uptime.",
-          "reportedAt": "2026-10-23T09:59:51.438Z"
+          "reportedAt": "2026-10-28T16:18:23.841Z"
         }
       ],
       "isFeatured": true,
       "isSponsored": true,
       "isApproved": true,
-      "viewsCount": 25481,
+      "viewsCount": 25480,
       "reviewCount": 168,
       "totalDeposits": 45000,
       "createdAt": "2026-10-01T00:00:00.000Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-prime-gold",
@@ -211,12 +211,12 @@
       "description": "Advertised as a registered, regulated cryptocurrency cloud mining and algorithmic investment firm headquartered in the UK. Features high-yield automated daily plans backed by liquid-cooled ASIC S21 Pro hardware, 100% principal capital return guarantee, instant payouts under 10 minutes, and a $5 welcome bonus upon registration.",
       "country": "United Kingdom",
       "category": "Crypto Cloud Mining & ROI Platform",
-      "status": "PAYING",
+      "status": "WAITING",
       "riskScore": 8.5,
       "riskLevel": "Good",
       "rating": 9.1,
       "dateAdded": "2026-08-29T00:00:00.000Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 3,
       "minInvestment": 20,
       "maxInvestment": 2500,
@@ -273,29 +273,29 @@
           "monitorId": "mon-1",
           "monitorName": "GoldPoll Monitor",
           "monitorLogo": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=80",
-          "status": "PAYING",
+          "status": "WAITING",
           "rating": 9.1,
-          "notes": "Verified instant USDT TRC20 and ETH cloud mining settlement payouts.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "notes": "Payment verification cycle pending confirmation. Status set to WAITING.",
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-pgr-2",
           "monitorId": "mon-2",
           "monitorName": "InvestScan Radar",
           "monitorLogo": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=100&auto=format&fit=crop&q=80",
-          "status": "PAYING",
+          "status": "WAITING",
           "rating": 9,
-          "notes": "Automated instant payouts verified under 10 minutes across all crypto networks.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "notes": "Awaiting next verified batch payout release. Status set to WAITING.",
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         }
       ],
       "isFeatured": true,
       "isSponsored": true,
       "isApproved": true,
-      "viewsCount": 12840,
+      "viewsCount": 12842,
       "reviewCount": 295,
       "createdAt": "2026-08-29T00:00:00.000Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-aura-diamond",
@@ -313,7 +313,7 @@
       "riskLevel": "Good",
       "rating": 9.1,
       "dateAdded": "2026-08-26T00:00:00.000Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 6,
       "minInvestment": 20,
       "maxInvestment": 2500,
@@ -373,7 +373,7 @@
           "status": "PAYING",
           "rating": 9,
           "notes": "Verified instant USDT TRC20 and ETH settlement payouts.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-adh-2",
@@ -383,7 +383,7 @@
           "status": "PAYING",
           "rating": 8.9,
           "notes": "Automated payouts verified across all supported crypto gateways.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         }
       ],
       "isFeatured": true,
@@ -392,7 +392,7 @@
       "viewsCount": 14250,
       "reviewCount": 342,
       "createdAt": "2026-08-26T00:00:00.000Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-goldbod-pro",
@@ -410,7 +410,7 @@
       "riskLevel": "Good",
       "rating": 8.9,
       "dateAdded": "2026-08-31T00:00:00.000Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 1,
       "minInvestment": 50,
       "maxInvestment": 2500,
@@ -472,7 +472,7 @@
           "status": "PAYING",
           "rating": 9,
           "notes": "Test payout batch verified instantly via USDT TRC20.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-gb-2",
@@ -482,7 +482,7 @@
           "status": "PAYING",
           "rating": 8.8,
           "notes": "Consistent daily capital returns and instant processing confirmed.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         },
         {
           "id": "mr-gb-3",
@@ -492,7 +492,7 @@
           "status": "PAYING",
           "rating": 8.9,
           "notes": "Verified operational uptime and active reserve funds.",
-          "reportedAt": "2026-10-23T09:59:51.438Z"
+          "reportedAt": "2026-10-28T16:18:23.841Z"
         }
       ],
       "isFeatured": true,
@@ -501,7 +501,7 @@
       "viewsCount": 5420,
       "reviewCount": 2840,
       "createdAt": "2026-08-31T00:00:00.000Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-cloudminex",
@@ -514,12 +514,12 @@
       "description": "Automated enterprise-grade cloud hash rate protocol hosted on Vercel, offering high-density cloud mining and daily yield generation. Features automated instant payouts via Mobile Money (MTN, Telecel, AT) and USDT crypto, plus a GHS 50.00 free welcome credit for new registrations.",
       "country": "Ghana",
       "category": "Cloud Mining & Investment",
-      "status": "PAYING",
+      "status": "WAITING",
       "riskScore": 8,
       "riskLevel": "Good",
       "rating": 8.8,
       "dateAdded": "2026-09-01T00:00:00.000Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 0,
       "minInvestment": 10,
       "maxInvestment": 20000,
@@ -610,39 +610,39 @@
           "monitorId": "mon-1",
           "monitorName": "GoldPoll Monitor",
           "monitorLogo": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&auto=format&fit=crop&q=80",
-          "status": "PAYING",
+          "status": "WAITING",
           "rating": 8.9,
-          "notes": "Automated test payouts processed via Mobile Money and USDT.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "notes": "Awaiting network payout batch clearance. Status set to WAITING.",
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-cmx-2",
           "monitorId": "mon-2",
           "monitorName": "InvestScan Radar",
           "monitorLogo": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=100&auto=format&fit=crop&q=80",
-          "status": "PAYING",
+          "status": "WAITING",
           "rating": 8.7,
-          "notes": "Verified daily reward distribution and instant network settlement.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "notes": "Payout queue under verification. Status set to WAITING.",
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         },
         {
           "id": "mr-cmx-3",
           "monitorId": "mon-4",
           "monitorName": "CryptoAudit Watch",
           "monitorLogo": "https://images.unsplash.com/photo-1622979135225-d2ba269bc1df?w=100&auto=format&fit=crop&q=80",
-          "status": "PAYING",
+          "status": "WAITING",
           "rating": 8.8,
-          "notes": "Confirmed uptime SLA and smooth instant withdrawal processing.",
-          "reportedAt": "2026-10-23T09:59:51.438Z"
+          "notes": "Withdrawal processing monitored; currently in WAITING queue.",
+          "reportedAt": "2026-10-28T16:18:23.841Z"
         }
       ],
       "isFeatured": true,
       "isSponsored": false,
       "isApproved": true,
-      "viewsCount": 3890,
+      "viewsCount": 3892,
       "reviewCount": 42,
       "createdAt": "2026-09-01T00:00:00.000Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-1",
@@ -659,8 +659,8 @@
       "riskScore": 7.6,
       "riskLevel": "Good",
       "rating": 8.4,
-      "dateAdded": "2026-06-17T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-06-22T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 128,
       "minInvestment": 25,
       "maxInvestment": 25000,
@@ -703,7 +703,7 @@
           "status": "WAITING",
           "rating": 8.6,
           "notes": "Test withdrawal batch #412 processed in 14 minutes.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-1-2",
@@ -713,7 +713,7 @@
           "status": "WAITING",
           "rating": 8.4,
           "notes": "On-chain payout address active with stable tx outflow.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         },
         {
           "id": "mr-1-3",
@@ -723,7 +723,7 @@
           "status": "WAITING",
           "rating": 8.8,
           "notes": "Verified 12 consecutive payouts to monitoring wallets.",
-          "reportedAt": "2026-10-23T09:59:51.438Z"
+          "reportedAt": "2026-10-28T16:18:23.841Z"
         }
       ],
       "isFeatured": true,
@@ -731,8 +731,8 @@
       "isApproved": true,
       "viewsCount": 4230,
       "reviewCount": 14,
-      "createdAt": "2026-06-17T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-06-22T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-2",
@@ -750,8 +750,8 @@
       "riskLevel": "High Risk",
       "riskOverrideReason": "Multiple monitors reported pending withdrawals exceeding 48h SLA.",
       "rating": 5.1,
-      "dateAdded": "2026-07-31T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-08-05T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 84,
       "minInvestment": 50,
       "maxInvestment": 50000,
@@ -792,7 +792,7 @@
           "status": "WAITING",
           "rating": 3.5,
           "notes": "Withdrawal request $350 pending for 52 hours.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-2-2",
@@ -801,7 +801,7 @@
           "status": "WAITING",
           "rating": 4,
           "notes": "Users in community reporting support unresponsive.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         },
         {
           "id": "mr-2-3",
@@ -810,7 +810,7 @@
           "status": "WAITING",
           "rating": 6,
           "notes": "Small $10 payout cleared, larger amounts stalled.",
-          "reportedAt": "2026-10-23T09:59:51.438Z"
+          "reportedAt": "2026-10-28T16:18:23.841Z"
         }
       ],
       "isFeatured": false,
@@ -818,8 +818,8 @@
       "isApproved": true,
       "viewsCount": 2950,
       "reviewCount": 9,
-      "createdAt": "2026-07-31T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-08-05T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-3",
@@ -836,8 +836,8 @@
       "riskScore": 6.9,
       "riskLevel": "Moderate",
       "rating": 7.8,
-      "dateAdded": "2026-10-09T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-10-14T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 14,
       "minInvestment": 10,
       "maxInvestment": 15000,
@@ -879,7 +879,7 @@
           "status": "WAITING",
           "rating": 8.2,
           "notes": "Test batch 14 received instantaneously.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-3-2",
@@ -888,7 +888,7 @@
           "status": "WAITING",
           "rating": 8,
           "notes": "Valid smart contract event emits for micro withdrawals.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         }
       ],
       "isFeatured": true,
@@ -896,8 +896,8 @@
       "isApproved": true,
       "viewsCount": 3120,
       "reviewCount": 6,
-      "createdAt": "2026-10-09T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-10-14T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-4",
@@ -914,8 +914,8 @@
       "riskScore": 1.2,
       "riskLevel": "Critical Risk",
       "rating": 1.9,
-      "dateAdded": "2026-05-16T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-05-21T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 160,
       "minInvestment": 100,
       "maxInvestment": 100000,
@@ -946,7 +946,7 @@
           "status": "WAITING",
           "rating": 1,
           "notes": "Zero payouts observed in last 7 days.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-4-2",
@@ -955,7 +955,7 @@
           "status": "WAITING",
           "rating": 1,
           "notes": "Scam warning issued on forum channels.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         }
       ],
       "isFeatured": false,
@@ -963,8 +963,8 @@
       "isApproved": true,
       "viewsCount": 1850,
       "reviewCount": 12,
-      "createdAt": "2026-05-16T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-05-21T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-5",
@@ -981,8 +981,8 @@
       "riskScore": 8.3,
       "riskLevel": "Good",
       "rating": 9.1,
-      "dateAdded": "2026-03-27T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-04-01T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 210,
       "minInvestment": 20,
       "maxInvestment": 10000,
@@ -1024,7 +1024,7 @@
           "status": "WAITING",
           "rating": 9.2,
           "notes": "Consistent daily disbursements confirmed.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-5-2",
@@ -1033,7 +1033,7 @@
           "status": "WAITING",
           "rating": 9,
           "notes": "Low volatility, steady reserve management.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         }
       ],
       "isFeatured": true,
@@ -1041,8 +1041,8 @@
       "isApproved": true,
       "viewsCount": 5120,
       "reviewCount": 19,
-      "createdAt": "2026-03-27T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-04-01T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-6",
@@ -1059,8 +1059,8 @@
       "riskScore": 4.5,
       "riskLevel": "High Risk",
       "rating": 6.2,
-      "dateAdded": "2026-10-21T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-10-26T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 2,
       "minInvestment": 15,
       "maxInvestment": 5000,
@@ -1091,7 +1091,7 @@
           "status": "WAITING",
           "rating": 6,
           "notes": "Awaiting initial cycle completion.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         }
       ],
       "isFeatured": false,
@@ -1099,8 +1099,8 @@
       "isApproved": true,
       "viewsCount": 940,
       "reviewCount": 3,
-      "createdAt": "2026-10-21T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-10-26T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-7",
@@ -1117,8 +1117,8 @@
       "riskScore": 0.5,
       "riskLevel": "Critical Risk",
       "rating": 2.1,
-      "dateAdded": "2026-01-16T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-01-21T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 240,
       "minInvestment": 50,
       "maxInvestment": 20000,
@@ -1138,7 +1138,7 @@
           "status": "WAITING",
           "rating": 1,
           "notes": "Platform confirmed sunsetting operations.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         }
       ],
       "isFeatured": false,
@@ -1146,8 +1146,8 @@
       "isApproved": true,
       "viewsCount": 1400,
       "reviewCount": 8,
-      "createdAt": "2026-01-16T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-01-21T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     },
     {
       "id": "proj-8",
@@ -1164,8 +1164,8 @@
       "riskScore": 7.9,
       "riskLevel": "Good",
       "rating": 8.7,
-      "dateAdded": "2026-08-20T11:14:51.344Z",
-      "lastUpdated": "2026-10-23T10:49:51.438Z",
+      "dateAdded": "2026-08-25T17:33:23.751Z",
+      "lastUpdated": "2026-10-28T17:08:23.841Z",
       "lifetimeDays": 64,
       "minInvestment": 30,
       "maxInvestment": 30000,
@@ -1197,7 +1197,7 @@
           "status": "WAITING",
           "rating": 8.8,
           "notes": "Rapid automated batch payouts.",
-          "reportedAt": "2026-10-23T10:59:51.438Z"
+          "reportedAt": "2026-10-28T17:18:23.841Z"
         },
         {
           "id": "mr-8-2",
@@ -1206,7 +1206,7 @@
           "status": "WAITING",
           "rating": 8.6,
           "notes": "Test wallet payout confirmed.",
-          "reportedAt": "2026-10-23T10:29:51.438Z"
+          "reportedAt": "2026-10-28T16:48:23.841Z"
         }
       ],
       "isFeatured": true,
@@ -1214,8 +1214,8 @@
       "isApproved": true,
       "viewsCount": 3890,
       "reviewCount": 11,
-      "createdAt": "2026-08-20T11:14:51.344Z",
-      "updatedAt": "2026-10-23T10:49:51.438Z"
+      "createdAt": "2026-08-25T17:33:23.751Z",
+      "updatedAt": "2026-10-28T17:08:23.841Z"
     }
   ],
   "monitors": [
@@ -1227,9 +1227,9 @@
       "trustScore": 8.8,
       "description": "Established independent multi-chain investment telemetry monitor since 2018.",
       "status": "Active",
-      "lastUpdate": "2026-10-23T11:09:51.438Z",
+      "lastUpdate": "2026-10-28T17:28:23.841Z",
       "projectsReported": 142,
-      "createdAt": "2025-10-23T11:14:51.344Z"
+      "createdAt": "2025-10-28T17:33:23.751Z"
     },
     {
       "id": "mon-2",
@@ -1239,9 +1239,9 @@
       "trustScore": 8.4,
       "description": "Real-time blockchain payout confirmation tracker and scam detector.",
       "status": "Active",
-      "lastUpdate": "2026-10-23T10:59:51.438Z",
+      "lastUpdate": "2026-10-28T17:18:23.841Z",
       "projectsReported": 118,
-      "createdAt": "2025-12-27T11:14:51.344Z"
+      "createdAt": "2026-01-01T17:33:23.751Z"
     },
     {
       "id": "mon-3",
@@ -1251,9 +1251,9 @@
       "trustScore": 7.9,
       "description": "Automated deposit return test suite and payout velocity aggregator.",
       "status": "Active",
-      "lastUpdate": "2026-10-23T10:49:51.438Z",
+      "lastUpdate": "2026-10-28T17:08:23.841Z",
       "projectsReported": 95,
-      "createdAt": "2026-02-25T11:14:51.344Z"
+      "createdAt": "2026-03-02T17:33:23.751Z"
     },
     {
       "id": "mon-4",
@@ -1263,9 +1263,9 @@
       "trustScore": 9.1,
       "description": "Strict on-chain liquidity auditor verifying cold wallets and transaction IDs.",
       "status": "Active",
-      "lastUpdate": "2026-10-23T10:39:51.438Z",
+      "lastUpdate": "2026-10-28T16:58:23.841Z",
       "projectsReported": 76,
-      "createdAt": "2026-03-27T11:14:51.344Z"
+      "createdAt": "2026-04-01T17:33:23.751Z"
     },
     {
       "id": "mon-5",
@@ -1275,9 +1275,9 @@
       "trustScore": 7.2,
       "description": "Community-driven multi-monitor payout reporting aggregation.",
       "status": "Active",
-      "lastUpdate": "2026-10-23T10:29:51.438Z",
+      "lastUpdate": "2026-10-28T16:48:23.841Z",
       "projectsReported": 88,
-      "createdAt": "2026-04-26T11:14:51.344Z"
+      "createdAt": "2026-05-01T17:33:23.751Z"
     }
   ],
   "reviews": [
@@ -1299,8 +1299,8 @@
         "usr-demo-2"
       ],
       "reports": [],
-      "createdAt": "2026-10-23T08:14:51.438Z",
-      "updatedAt": "2026-10-23T08:14:51.438Z"
+      "createdAt": "2026-10-28T14:33:23.841Z",
+      "updatedAt": "2026-10-28T14:33:23.841Z"
     },
     {
       "id": "rev-ep-2",
@@ -1318,8 +1318,8 @@
       "helpfulCount": 18,
       "helpfulVoters": [],
       "reports": [],
-      "createdAt": "2026-10-22T15:14:51.438Z",
-      "updatedAt": "2026-10-22T15:14:51.438Z"
+      "createdAt": "2026-10-27T21:33:23.841Z",
+      "updatedAt": "2026-10-27T21:33:23.841Z"
     },
     {
       "id": "rev-ep-3",
@@ -1337,8 +1337,8 @@
       "helpfulCount": 15,
       "helpfulVoters": [],
       "reports": [],
-      "createdAt": "2026-10-21T11:14:51.438Z",
-      "updatedAt": "2026-10-21T11:14:51.438Z"
+      "createdAt": "2026-10-26T17:33:23.841Z",
+      "updatedAt": "2026-10-26T17:33:23.841Z"
     },
     {
       "id": "rev-1",
@@ -1358,8 +1358,8 @@
         "usr-demo-2"
       ],
       "reports": [],
-      "createdAt": "2026-10-19T11:14:51.438Z",
-      "updatedAt": "2026-10-19T11:14:51.438Z"
+      "createdAt": "2026-10-24T17:33:23.841Z",
+      "updatedAt": "2026-10-24T17:33:23.841Z"
     },
     {
       "id": "rev-2",
@@ -1379,8 +1379,8 @@
         "usr-demo-1"
       ],
       "reports": [],
-      "createdAt": "2026-10-16T11:14:51.438Z",
-      "updatedAt": "2026-10-16T11:14:51.438Z"
+      "createdAt": "2026-10-21T17:33:23.841Z",
+      "updatedAt": "2026-10-21T17:33:23.841Z"
     },
     {
       "id": "rev-3",
@@ -1398,8 +1398,8 @@
       "helpfulCount": 9,
       "helpfulVoters": [],
       "reports": [],
-      "createdAt": "2026-10-23T08:14:51.438Z",
-      "updatedAt": "2026-10-23T08:14:51.438Z"
+      "createdAt": "2026-10-28T14:33:23.841Z",
+      "updatedAt": "2026-10-28T14:33:23.841Z"
     }
   ],
   "events": [
@@ -1414,7 +1414,7 @@
       "message": "Energy Point officially listed on HyipMasterTracker with 7 Crown Tiers (180 Days), ₵20 Free Signup Gift, and Instant MoMo & Crypto settlements.",
       "monitorId": "mon-1",
       "monitorName": "GoldPoll Monitor",
-      "createdAt": "2026-10-23T11:02:51.438Z"
+      "createdAt": "2026-10-28T17:21:23.841Z"
     },
     {
       "id": "evt-ep-2",
@@ -1427,7 +1427,7 @@
       "message": "Automated payout batch of ₵7,228 GHS (≈ $602 USDT) dispatched across MTN MoMo and USDT TRC20 wallets.",
       "monitorId": "mon-2",
       "monitorName": "InvestScan Radar",
-      "createdAt": "2026-10-23T10:39:51.438Z"
+      "createdAt": "2026-10-28T16:58:23.841Z"
     },
     {
       "id": "evt-ep-3",
@@ -1440,20 +1440,20 @@
       "message": "HyipMasterTracker Radar verified 100% solvency, audited ₵177M liquidity reserve fund, and < 5 minute average withdrawal speed.",
       "monitorId": "mon-3",
       "monitorName": "HyipMasterTracker Radar",
-      "createdAt": "2026-10-23T09:56:51.438Z"
+      "createdAt": "2026-10-28T16:15:23.841Z"
     },
     {
       "id": "evt-1",
       "projectId": "proj-prime-gold",
       "projectName": "Prime Gold Resources",
       "projectSlug": "prime-gold-resources",
-      "type": "PAYMENT_REPORTED",
+      "type": "STATUS_CHANGED",
       "oldStatus": "PAYING",
-      "newStatus": "PAYING",
-      "message": "Instant automated payouts verified on USDT TRC20 and Ethereum cloud mining payouts.",
+      "newStatus": "WAITING",
+      "message": "Platform status updated to WAITING pending next payout cycle verification.",
       "monitorId": "mon-1",
       "monitorName": "GoldPoll Monitor",
-      "createdAt": "2026-10-23T08:49:51.438Z"
+      "createdAt": "2026-10-28T15:08:23.841Z"
     },
     {
       "id": "evt-2",
@@ -1466,7 +1466,7 @@
       "message": "Live test payout #118 verified on-chain and disbursed instantly to monitoring wallet.",
       "monitorId": "mon-2",
       "monitorName": "InvestScan Radar",
-      "createdAt": "2026-10-23T07:24:51.438Z"
+      "createdAt": "2026-10-28T13:43:23.841Z"
     },
     {
       "id": "evt-3",
@@ -1479,20 +1479,20 @@
       "message": "Daily profit distribution confirmed with fast multi-signature withdrawal settlement.",
       "monitorId": "mon-4",
       "monitorName": "CryptoAudit Watch",
-      "createdAt": "2026-10-23T04:54:51.438Z"
+      "createdAt": "2026-10-28T11:13:23.841Z"
     },
     {
       "id": "evt-4",
       "projectId": "proj-cloudminex",
       "projectName": "CloudMineX",
       "projectSlug": "cloudminex",
-      "type": "PAYMENT_REPORTED",
+      "type": "STATUS_CHANGED",
       "oldStatus": "PAYING",
-      "newStatus": "PAYING",
-      "message": "Fast payout verified with stable transaction outflow across all monitoring nodes.",
+      "newStatus": "WAITING",
+      "message": "Platform status updated to WAITING awaiting automated network payout batch clearance.",
       "monitorId": "mon-3",
       "monitorName": "HyipHome",
-      "createdAt": "2026-10-23T02:34:51.438Z"
+      "createdAt": "2026-10-28T08:53:23.841Z"
     },
     {
       "id": "evt-5",
@@ -1505,7 +1505,7 @@
       "message": "Batch withdrawal payout #45 verified under 10 minutes.",
       "monitorId": "mon-2",
       "monitorName": "InvestScan Radar",
-      "createdAt": "2026-10-23T11:02:51.438Z"
+      "createdAt": "2026-10-28T17:21:23.841Z"
     }
   ],
   "watchlists": [
@@ -1538,7 +1538,7 @@
       "projectId": "proj-2",
       "projectSlug": "novacapital-group",
       "isRead": false,
-      "createdAt": "2026-10-23T10:44:51.438Z"
+      "createdAt": "2026-10-28T17:03:23.841Z"
     },
     {
       "id": "notif-2",
@@ -1549,7 +1549,7 @@
       "projectId": "proj-1",
       "projectSlug": "alphayield-protocol",
       "isRead": true,
-      "createdAt": "2026-10-23T09:44:51.438Z"
+      "createdAt": "2026-10-28T16:03:23.841Z"
     }
   ],
   "advertisements": [
@@ -1559,13 +1559,13 @@
       "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&auto=format&fit=crop&q=80",
       "targetUrl": "https://example.com/cryptaudit-pro",
       "position": "Homepage Hero",
-      "startDate": "2026-10-13T11:14:51.344Z",
-      "endDate": "2026-11-12T11:14:51.344Z",
+      "startDate": "2026-10-18T17:33:23.751Z",
+      "endDate": "2026-11-17T17:33:23.751Z",
       "status": "Active",
       "priority": 1,
       "impressions": 12400,
       "clicks": 842,
-      "createdAt": "2026-10-13T11:14:51.344Z"
+      "createdAt": "2026-10-18T17:33:23.751Z"
     },
     {
       "id": "ad-2",
@@ -1573,13 +1573,13 @@
       "image": "https://images.unsplash.com/photo-1622979135225-d2ba269bc1df?w=400&auto=format&fit=crop&q=80",
       "targetUrl": "https://example.com/vault-hardware",
       "position": "Sidebar",
-      "startDate": "2026-10-08T11:14:51.344Z",
-      "endDate": "2026-11-07T11:14:51.344Z",
+      "startDate": "2026-10-13T17:33:23.751Z",
+      "endDate": "2026-11-12T17:33:23.751Z",
       "status": "Active",
       "priority": 2,
       "impressions": 8900,
       "clicks": 410,
-      "createdAt": "2026-10-08T11:14:51.344Z"
+      "createdAt": "2026-10-13T17:33:23.751Z"
     }
   ],
   "submissions": [],
